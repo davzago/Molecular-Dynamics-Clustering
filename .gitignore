@@ -4,3 +4,7 @@ Script/Pipfile
 Script/Pipfile.lock
 
 Script/__pycache__/
+
+.vscode/
+
+SB/
