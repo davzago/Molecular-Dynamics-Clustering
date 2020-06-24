@@ -12,7 +12,7 @@ parser.add_argument('-out_dir', help='Output directory')
 parser.add_argument('-tmp_dir', help='Temporary file directory')
 args = parser.parse_args()
 
-snapSet = parsing.parse(args.data_path)
+snapSet = parsing.parse2(args.data_path)
 n_sanps = len(snapSet)
 
 
@@ -40,7 +40,8 @@ for i in range(0, n_sanps):
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
 model = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/")
-print(model.labels_)
+print(model)
+print(n_sanps,model.shape)
     
 
 
