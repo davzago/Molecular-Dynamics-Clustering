@@ -12,17 +12,28 @@ args = parser.parse_args()
 
 snapSet = parsing.parse(args.data_path)
 
-# dict per memorizzare, per ogni snapshot, per ogni nodo, la posizione nella matrice
-posList = [dict() for x in range(0, len(snapSet)-1)]
-for snap in range (0, len(snapSet)-1):
-    pos = 0
-    for node in snapSet[snap].nodes:
-        posList[snap][node] = pos
-        pos += 1
-
+# nodeList contiene tutti i nodi che compaiono almeno una volta in uno snapshot
+nodeList = []
 for i in range(0, len(snapSet)-1):
+    for s in snapSet[i].nodes:
+        if(s not in nodeList):
+            nodeList.append(s)
+
+nodeList.sort()
+
+# dict per memorizzare, per ogni snapshot, per ogni nodo, la posizione nella matrice
+# si potrebbe spostare come proprietà di Snapshot, così da avere un dict distinto per ogni snapshot
+posList = dict()
+pos = 0
+for node in nodeList:
+    posList[node] = pos
+    pos += 1
+
+for i in range(0, len(snapSet)):
     matrix_snap = matrix.calcMatrix(i, snapSet, posList)
-    matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
+    # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
+    
+
 
 """ 
 ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT

@@ -3,12 +3,12 @@ from matplotlib import pyplot as plt
 
 # compute the n-th snapshot's distance matrix
 def calcMatrix(snap, snapSet, posList):
-    n = len(snapSet[snap].nodes)
+    n = len(posList)
     matrix = np.zeros((n, n))
     for i in snapSet[snap].edges:
         node1 = i[0]
         node2 = i[1]
-        matrix[posList[snap][node1]][posList[snap][node2]] = i[3]
+        matrix[posList[node1]][posList[node2]] = i[3]
     return matrix
 
 # plot the n-th snapshot's distance matrix

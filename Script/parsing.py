@@ -19,12 +19,11 @@ def parse(data_path):
             interaction = split_1[1]
             distance = float(split_1[3])
             energy = float(split_1[5])
-            # Ci basta l'intero o ci serve tutta la stringa? penso che i numeri si ripetano in uno snapshot indicando però nodi diversi
-            atom1 = int((split_1[0].split(":"))[1])
-            atom2 = int((split_1[2].split(":"))[1])
-            snapshot[n].addNode(atom1)
-            snapshot[n].addNode(atom2)
-            snapshot[n].addEdge(atom1, atom2, interaction, distance, energy)
+            residue1 = (int(split_1[0].split(":")[1]), split_1[0].split(":")[0])
+            residue2 = (int(split_1[2].split(":")[1]), split_1[0].split(":")[0])
+            snapshot[n].addNode(residue1)
+            snapshot[n].addNode(residue2)
+            snapshot[n].addEdge(residue1, residue2, interaction, distance, energy)
         snapshot[n].nodes.sort()
         n += 1
     return snapshot
