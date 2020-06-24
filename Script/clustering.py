@@ -3,8 +3,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram
 
-def euclidean_cluster(n_cluster, X, out_dir="../fig/"):
+def euclidean_cluster(n_cluster, X, n_snaps, out_dir="fig/"):
     c_type = "euclidean_distance"
+    X = X.reshape((n_snaps,-1))
     clustering = AgglomerativeClustering(n_clusters=n_cluster, compute_full_tree=True).fit(X)
     plt.title('Hierarchical Clustering Dendrogram')
     plot_dendrogram(clustering, truncate_mode='level', p=3)
