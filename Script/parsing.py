@@ -1,4 +1,5 @@
 import Snapshot
+import os
 
 def parse(data_path): 
     with open(data_path) as f:
@@ -30,3 +31,32 @@ def parse(data_path):
 
 
 
+def parse2(data_path): 
+    with open(data_path) as f:
+        path = f.readline()
+
+    snap = []
+    directory = os.fsencode(path)
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        f = open(path + "/" + filename, 'r', encoding='ISO-8859-1')
+        next(f)
+        snap.append([line.rstrip() for line in f])
+
+    snapshot = []
+    n = 0
+    for s in snap:
+        snapshot.append(Snapshot.Snapshot(n))
+        for data in s:
+            split_1 = data.split("\t")
+            interaction = split_1[1]
+            distance = float(split_1[3])
+            energy = float(split_1[5])
+            residue1 = (int(split_1[0].split(":")[1]), split_1[0].split(":")[0])
+            residue2 = (int(split_1[2].split(":")[1]), split_1[0].split(":")[0])
+            snapshot[n].addNode(residue1)
+            snapshot[n].addNode(residue2)
+            snapshot[n].addEdge(residue1, residue2, interaction, distance, energy)
+        snapshot[n].nodes.sort()
+        n += 1
+    return snapshot

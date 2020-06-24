@@ -33,12 +33,13 @@ for node in nodeList:
     posList[node] = pos
     pos += 1
 
-matrix_snap = np.zeros((n_sanps,548,548))
+n_nodes = len(nodeList)
+matrix_snap = np.zeros((n_sanps,n_nodes,n_nodes))
 for i in range(0, n_sanps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, posList)
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
-model = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "dendrogram/")
+model = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/")
 print(model.labels_)
     
 
