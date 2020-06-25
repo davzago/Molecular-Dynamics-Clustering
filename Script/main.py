@@ -4,6 +4,7 @@ import numpy as np
 import parsing
 import matrix
 import clustering
+import RMSD
 
 parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
@@ -39,9 +40,10 @@ for i in range(0, n_sanps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, posList)
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
-model = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/")
-print(model)
-print(n_sanps,model.shape)
+labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
+print(labels)
+print(n_sanps,labels.shape)
+RMSD.get_dense_array()
     
 
 
