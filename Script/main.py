@@ -8,11 +8,13 @@ import RMSD
 
 parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
+parser.add_argument('pdb_path', help='Path to the pdb directory')
 parser.add_argument('-conf', help='Configuration file with algorithm parameters')
 parser.add_argument('-out_dir', help='Output directory')
 parser.add_argument('-tmp_dir', help='Temporary file directory')
 args = parser.parse_args()
 
+pdb_path = args.pdb_path # to change since at the moment this is required
 snapSet = parsing.parse2(args.data_path)
 n_sanps = len(snapSet)
 
@@ -41,9 +43,9 @@ for i in range(0, n_sanps):
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
 labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
-print(labels)
-print(n_sanps,labels.shape)
-RMSD.get_dense_array()
+#print(labels)
+#print(n_sanps,labels.shape)
+print(RMSD.get_dense_array(pdb_path))
     
 
 
