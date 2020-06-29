@@ -14,7 +14,7 @@ parser.add_argument('-out_dir', help='Output directory')
 parser.add_argument('-tmp_dir', help='Temporary file directory')
 args = parser.parse_args()
 
-pdb_path = args.pdb_path # to change since at the moment this is required
+pdb_path = args.pdb_path 
 snapSet = parsing.parse2(args.data_path)
 n_sanps = len(snapSet)
 

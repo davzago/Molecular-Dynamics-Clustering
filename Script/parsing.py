@@ -1,5 +1,6 @@
 import Snapshot
 import os
+import re
 
 def parse(data_path): 
     with open(data_path) as f:
@@ -7,6 +8,7 @@ def parse(data_path):
 
     snap = []
     for l in lines:
+        print(l)
         with open(l) as s:
             next(s)
             snap.append([line.rstrip() for line in s])
@@ -34,11 +36,12 @@ def parse(data_path):
 def parse2(data_path): 
     with open(data_path) as f:
         path = f.readline()
-
     snap = []
     directory = os.fsencode(path)
-    for file in os.listdir(directory):
+    files = sorted(os.listdir(directory), key=lambda s : int("".join(re.findall(r'\d+', s.decode('utf-8'))))) # kind of ugly but useful to keep the files in the right order (not needed if using parse instead of parse2)
+    for file in files:
         filename = os.fsdecode(file)
+        print(filename)
         f = open(path + "/" + filename, 'r', encoding='ISO-8859-1')
         next(f)
         snap.append([line.rstrip() for line in f])
