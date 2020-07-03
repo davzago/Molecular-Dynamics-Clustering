@@ -3,8 +3,6 @@ import numpy as np
 from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
 
-
-
 import parsing
 import matrix
 import clustering
@@ -48,11 +46,11 @@ for i in range(0, n_sanps):
 labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
 #print(labels)
 #print(n_sanps,labels.shape)
-RMSD_array = RMSD.get_dense_array(pdb_path)
+""" RMSD_array = RMSD.get_dense_array(pdb_path)
 Z = linkage(RMSD_array, method='ward')
 dendrogram(Z, 0)
 plt.show()
-plt.close()
+plt.close() """
     
 
 ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
