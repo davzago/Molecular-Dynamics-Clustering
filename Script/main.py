@@ -21,11 +21,10 @@ n_sanps = len(snapSet)
 
 # nodeList contiene tutti i nodi che compaiono almeno una volta in uno snapshot
 nodeList = []
-for i in range(0, n_sanps-1):
+for i in range(0, n_sanps):
     for s in snapSet[i].nodes:
         if(s not in nodeList):
             nodeList.append(s)
-
 nodeList.sort()
 
 # dict per memorizzare, per ogni snapshot, per ogni nodo, la posizione nella matrice
@@ -43,25 +42,26 @@ for i in range(0, n_sanps):
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
 labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
-#print(labels)
-#print(n_sanps,labels.shape)
+# print(labels)
+# print(n_sanps,labels.shape)
 print(RMSD.get_dense_array(pdb_path))
     
 
-
-""" 
 ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
-# key dict sono edges, value sono occorrenze dell'edge key
+# key dict sono edges, value sono occorrenze dell'edge key (valuta residue1, residue2, interaction)
 count = dict()
-for i in range(0, len(snapSet)-1):
+for i in range(0, len(snapSet)):
     for s in snapSet[i].edges:
-        if((str(s[0]) + "-" + str(s[1])) in count):
-            count[str(s[0]) + "-" + str(s[1])] += 1
+        if((str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])) in count):
+            count[str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])] += 1
         else:
-            count[str(s[0]) + "-" + str(s[1])] = 1
+            count[str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])] = 1
 
-for i in count:
-    print(i, ": ", count[i])
+count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
-print(len(count))
- """
+edges_count = open("edges_count.txt","w")
+for i in count_sorted:
+    edges_count.write(str(i[0]) + ": " + str(i[1]) + "\n")
+    # print(i[0], ": ", i[1])
+edges_count.close()
+

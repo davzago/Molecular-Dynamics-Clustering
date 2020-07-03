@@ -10,7 +10,7 @@ def get_dense_array(path_to_pdb): # now cycle trough the files with os
   n = len(files)
   c = 0 # pos of the distance in the distance array
   distance_array = np.zeros(int(n*(n-1)/2)) # using gauss approach i calculate the number of unique pair distances
-  resultFile = open("output.txt","w")
+  resultFile = open("output_TMscore.txt","w")
   for i in range(0, n-1):
     for j in range(i+1, n):
       structure1 = files[i].decode('utf-8')
