@@ -6,7 +6,6 @@ import re
 def get_dense_array(path_to_pdb): # now cycle trough the files with os
   directory = os.fsencode(path_to_pdb)
   files = sorted(os.listdir(directory), key=lambda s : int("".join(re.findall(r'\d+', s.decode('utf-8'))))) # kind of ugly but useful to keep the files in the right order
-  print(files)
   n = len(files)
   c = 0 # pos of the distance in the distance array
   distance_array = np.zeros(int(n*(n-1)/2)) # using gauss approach i calculate the number of unique pair distances
