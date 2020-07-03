@@ -8,14 +8,14 @@ def calcMatrix(snap, snapSet, posList):
     for i in snapSet[snap].edges:
         node1 = i[0]
         node2 = i[1]
+        if(posList[node1] > posList[node2]): 
+            tmp = node1
+            node1 = node2
+            node2 = tmp
         if(matrix[posList[node1]][posList[node2]] == 0):
             matrix[posList[node1]][posList[node2]] = i[4] - i[3]
         else:
             matrix[posList[node1]][posList[node2]] += i[4] - i[3]
-        """ if(posList[node1] <= posList[node2]): 
-            matrix[posList[node1]][posList[node2]] = i[3]
-        else:
-            matrix[posList[node2]][posList[node1]] = i[3] """
     return matrix
 
 # plot the n-th snapshot's distance matrix
