@@ -43,7 +43,7 @@ for i in range(0, n_sanps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, posList)
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
-labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
+#labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
 #print(labels)
 #print(n_sanps,labels.shape)
 """ RMSD_array = RMSD.get_dense_array(pdb_path)
@@ -70,4 +70,10 @@ for i in count_sorted:
     edges_count.write(str(i[0]) + ": " + str(i[1]) + "\n")
     # print(i[0], ": ", i[1])
 edges_count.close()
+
+sil = clustering.clusterize(matrix_snap, n_sanps)
+
+model = clustering.get_best_cluster(matrix_snap, n_sanps, sil)
+
+
 
