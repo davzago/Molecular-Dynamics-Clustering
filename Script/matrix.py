@@ -13,9 +13,9 @@ def calcMatrix(snap, snapSet, posList):
             node1 = node2
             node2 = tmp
         if(matrix[posList[node1]][posList[node2]] == 0):
-            matrix[posList[node1]][posList[node2]] = i[4] - i[3]
+            matrix[posList[node1]][posList[node2]] = i[3]/i[4]
         else:
-            matrix[posList[node1]][posList[node2]] += i[4] - i[3]
+            matrix[posList[node1]][posList[node2]] += i[3]/i[4]
     return matrix
 
 # plot the n-th snapshot's distance matrix

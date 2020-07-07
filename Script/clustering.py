@@ -64,6 +64,17 @@ def plot_dendrogram(model, n_cluster, **kwargs):
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, color_threshold=linkage_matrix[len(linkage_matrix)-n_cluster][2], **kwargs) 
 
+""" def hamming_cluster(n_cluster, X, n_sanps, out_dir="fig/"):
+    c_type = "hamming_distance"
+    X = X.reshape((n_sanps,-1))
+    Z = linkage(X, metric='hamming')
+    clustering = fcluster(Z,t=5 , criterion='maxclust')
+    plt.title('Hierarchical Clustering Dendrogram')
+    dendrogram(Z)
+    plt.savefig(out_dir + "dendrogram_" + c_type + ".png")
+    plt.show()
+    plt.close()
+    return clustering """
 
 """def plot_dendrogram_old(model, **kwargs):
 

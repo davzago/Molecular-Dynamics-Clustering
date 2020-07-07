@@ -26,6 +26,8 @@ def parse(data_path):
             snapshot[n].addNode(residue1)
             snapshot[n].addNode(residue2)
             snapshot[n].addEdge(residue1, residue2, interaction, distance, energy)
+            snapshot[n].addSimpleEdge(residue1, residue2)
+            snapshot[n].addTypeEdge(residue1, residue2, interaction)
         snapshot[n].nodes.sort()
         n += 1
     return snapshot
@@ -56,6 +58,8 @@ def parse2(data_path):
             snapshot[n].addNode(residue1)
             snapshot[n].addNode(residue2)
             snapshot[n].addEdge(residue1, residue2, interaction, distance, energy)
+            snapshot[n].addSimpleEdge(residue1, residue2)
+            snapshot[n].addTypeEdge(residue1, residue2, interaction)
         snapshot[n].nodes.sort()
         n += 1
     return snapshot
