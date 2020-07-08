@@ -1,5 +1,5 @@
 from sklearn.cluster import AgglomerativeClustering
-from sklearn.metrics import silhouette_score
+from sklearn.metrics import silhouette_score, adjusted_rand_score
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
@@ -23,8 +23,8 @@ def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
 # Compute the avarage silhouette for each n_clusters in range 2-50
 def clusterize(X):
     sil = dict()
-    for k in range(2,51):
-       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True).fit(X)
+    for k in range(4,51):
+       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
        sil[k] = silhouette_score(X, clustering.labels_)
     return sil
 
@@ -34,12 +34,12 @@ def clusterize(X):
 # X must be already shaped as a matrix of shape (n_samples, n_features)
 def get_best_cluster(X, sil):
     maximum = max(sil, key=sil.get)
-    print(sil[maximum])
-    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0).fit(X)
+    print("maximum RMSD silhouette:" ,sil[maximum], "with", maximum, "clusters")
+    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, linkage='average', affinity='cosine').fit(X)
     plot_dendrogram(dendo_clustering, maximum)
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")
     plt.show()
-    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True).fit(X)
+    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
     return model
 
 def reshape_matrix(X, n_snaps):
@@ -65,7 +65,7 @@ def plot_dendrogram(model, n_cluster, **kwargs):
     
     # To show the right cut on the dendogram we search for the treshold of the best cluster in the linkage matrix
     # Plot the corresponding dendrogram
-    dendrogram(linkage_matrix, color_threshold=linkage_matrix[len(linkage_matrix)-n_cluster][2], **kwargs) 
+    dendrogram(linkage_matrix, color_threshold=linkage_matrix[len(linkage_matrix)-n_cluster][2]+0.00001, **kwargs) 
 
 """ def hamming_cluster(n_cluster, X, n_sanps, out_dir="fig/"):
     c_type = "hamming_distance"
@@ -97,3 +97,23 @@ def plot_dendrogram(model, n_cluster, **kwargs):
 
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, **kwargs)"""
+
+def clusterize_RMSD(X):
+    sil = dict()
+    for k in range(4,51):
+       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, affinity='precomputed', linkage='average').fit(X)
+       sil[k] = silhouette_score(X, clustering.labels_)
+    return sil
+
+def get_best_cluster_RMSD(X, sil):
+    maximum = max(sil, key=sil.get)
+    print("maximum RMSD silhouette:", sil[maximum], "with", maximum, "clusters")
+    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, affinity='precomputed', linkage='average').fit(X)
+    plot_dendrogram(dendo_clustering, maximum)
+    plt.xlabel("Number of points in node (or index of point if no parenthesis).")
+    plt.show()
+    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, affinity='precomputed', linkage='average').fit(X)
+    return model
+
+def get_randIndex(contacts_labels, RMSD_labels):
+    return adjusted_rand_score(contacts_labels, RMSD_labels)

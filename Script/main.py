@@ -56,6 +56,11 @@ Z = linkage(RMSD_array, method='ward')
 dendrogram(Z, 0)
 plt.show()
 plt.close() """
+RMSD_distance_matrix = RMSD.get_distance_matrix(pdb_path)
+sil_RMSD = clustering.clusterize_RMSD(RMSD_distance_matrix)
+model_RMSD = clustering.get_best_cluster_RMSD(RMSD_distance_matrix, sil_RMSD)
+
+
     
 
 ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
@@ -74,7 +79,10 @@ X = clustering.reshape_matrix(matrix_snap, n_snaps)
 sil = clustering.clusterize(no_diag_snaps)
 
 model = clustering.get_best_cluster(no_diag_snaps, sil)
-print(model.n_clusters_, model.labels_)
+rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
+print("RandIndex between RMSD clustering and contact clustering:", rand_index)
+print(model_RMSD.labels_)
+print(model.labels_)
 
 
 """ edges_count = open("edges_count.txt","w")
