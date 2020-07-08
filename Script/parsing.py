@@ -15,7 +15,7 @@ def parse(data_path):
     snapshot = []
     n = 0
     for s in snap:
-        snapshot.append(Snapshot.Snapshot(n))
+        snapshot.append(Snapshot.Snapshot())
         for data in s:
             split_1 = data.split("\t")
             interaction = split_1[1]
@@ -28,7 +28,7 @@ def parse(data_path):
             snapshot[n].addEdge(residue1, residue2, interaction, distance, energy)
             snapshot[n].addSimpleEdge(residue1, residue2)
             snapshot[n].addTypeEdge(residue1, residue2, interaction)
-        snapshot[n].nodes.sort()
+        # snapshot[n].nodes.sort()
         n += 1
     return snapshot
 
@@ -47,7 +47,7 @@ def parse2(data_path):
     snapshot = []
     n = 0
     for s in snap:
-        snapshot.append(Snapshot.Snapshot(n))
+        snapshot.append(Snapshot.Snapshot())
         for data in s:
             split_1 = data.split("\t")
             interaction = split_1[1]
@@ -60,6 +60,6 @@ def parse2(data_path):
             snapshot[n].addEdge(residue1, residue2, interaction, distance, energy)
             snapshot[n].addSimpleEdge(residue1, residue2)
             snapshot[n].addTypeEdge(residue1, residue2, interaction)
-        snapshot[n].nodes.sort()
+        #snapshot[n].nodes.sort()
         n += 1
     return snapshot

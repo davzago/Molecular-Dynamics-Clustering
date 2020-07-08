@@ -2,6 +2,7 @@ import argparse
 import numpy as np
 from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
+import operator
 
 import parsing
 import matrix
@@ -27,7 +28,7 @@ for i in range(0, n_sanps):
     for s in snapSet[i].nodes:
         if(s not in node_list):
             node_list.append(s)
-node_list.sort()
+node_list.sort(key = operator.itemgetter(1, 0))
 
 # dict per memorizzare, per ogni snapshot, per ogni nodo, la posizione nella matrice
 # si potrebbe spostare come proprietà di Snapshot, così da avere un dict distinto per ogni snapshot

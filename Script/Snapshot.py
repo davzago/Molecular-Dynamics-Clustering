@@ -1,6 +1,5 @@
 class Snapshot:
-    def __init__(self, id):
-        self.id = id
+    def __init__(self):
         self.nodes = []
         self.edges = []
         self.simple_edges = []
