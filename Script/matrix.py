@@ -27,3 +27,15 @@ def plotDistanceMatrix(matrix_snap, snap, snapSet):
     plt.colorbar()
     plt.savefig("../fig/" + str(snap) + ".png")
     plt.close()
+
+def ignore_diagonal(matrix_snap):
+    no_diagonal_snaps = []
+    for k in range(0,matrix_snap.shape[0]):
+        contacts = []
+        for i in range(0, matrix_snap.shape[1]-100):
+            for j in range(i+100, matrix_snap.shape[1]):
+                contacts.append(matrix_snap[k,i,j])
+        no_diagonal_snaps.append(contacts)
+    return np.array(no_diagonal_snaps)
+
+

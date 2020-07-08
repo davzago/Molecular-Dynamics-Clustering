@@ -3,6 +3,7 @@ import numpy as np
 from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
 import operator
+import sys
 
 import parsing
 import matrix
@@ -19,12 +20,12 @@ args = parser.parse_args()
 
 pdb_path = args.pdb_path 
 snapSet = parsing.parse2(args.data_path)
-n_sanps = len(snapSet)
+n_snaps = len(snapSet)
 
 
 # node_list contiene tutti i nodi che compaiono almeno una volta in uno snapshot
 node_list = []
-for i in range(0, n_sanps):
+for i in range(0, n_snaps):
     for s in snapSet[i].nodes:
         if(s not in node_list):
             node_list.append(s)
@@ -39,10 +40,13 @@ for node in node_list:
     pos += 1
 
 n_nodes = len(node_list)
-matrix_snap = np.zeros((n_sanps,n_nodes,n_nodes))
-for i in range(0, n_sanps):
+matrix_snap = np.zeros((n_snaps,n_nodes,n_nodes))
+for i in range(0, n_snaps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, node_position)
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
+
+np.set_printoptions(threshold=sys.maxsize)
+no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
 
 #labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
 #print(labels)
@@ -66,9 +70,11 @@ for i in range(0, len(snapSet)):
 
 count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
-sil = clustering.clusterize(matrix_snap, n_sanps)
+X = clustering.reshape_matrix(matrix_snap, n_snaps)
+sil = clustering.clusterize(no_diag_snaps)
 
-model = clustering.get_best_cluster(matrix_snap, n_sanps, sil)
+model = clustering.get_best_cluster(no_diag_snaps, sil)
+print(model.n_clusters_, model.labels_)
 
 
 """ edges_count = open("edges_count.txt","w")

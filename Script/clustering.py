@@ -21,9 +21,8 @@ def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
     # of the labels of the 2 cluster composing it ence a cluster with a label lower than n is a cluster with a single observation
 
 # Compute the avarage silhouette for each n_clusters in range 2-50
-def clusterize(X, n_snaps):
+def clusterize(X):
     sil = dict()
-    X = X.reshape((n_snaps,-1))
     for k in range(2,51):
        clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True).fit(X)
        sil[k] = silhouette_score(X, clustering.labels_)
@@ -32,15 +31,19 @@ def clusterize(X, n_snaps):
 # The first AgglomerativeClustering is used to create the dendogram since sklearn requires a distance_threshold to return
 #  the distances between clusters, the second time we actually compute the best cluster based on silhouettes 
 # couldn't find a way to save the clustering steps so we recompute the best cluster
-def get_best_cluster(X, n_snaps, sil):
-    X = X.reshape((n_snaps,-1))
+# X must be already shaped as a matrix of shape (n_samples, n_features)
+def get_best_cluster(X, sil):
     maximum = max(sil, key=sil.get)
+    print(sil[maximum])
     dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0).fit(X)
     plot_dendrogram(dendo_clustering, maximum)
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")
     plt.show()
     model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True).fit(X)
     return model
+
+def reshape_matrix(X, n_snaps):
+    return X.reshape((n_snaps, -1))
 
 def plot_dendrogram(model, n_cluster, **kwargs):
     # Create linkage matrix and then plot the dendrogram
