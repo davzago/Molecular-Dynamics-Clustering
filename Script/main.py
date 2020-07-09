@@ -76,13 +76,18 @@ for i in range(0, len(snapSet)):
 count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
-sil = clustering.clusterize(no_diag_snaps)
+#X_PCA = clustering.PCA_transform(X)
+#X_SVD = clustering.SVD_transform(X)
+X_NMF = clustering.NMF_transform(X)
+sil = clustering.clusterize(X_NMF)
 
-model = clustering.get_best_cluster(no_diag_snaps, sil)
+model = clustering.get_best_cluster(X_NMF, sil)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
+mutal_info_score = clustering.mutual_info_score(model_RMSD.labels_,model.labels_)
+print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
 print("RandIndex between RMSD clustering and contact clustering:", rand_index)
-print(model_RMSD.labels_)
-print(model.labels_)
+"""print(model_RMSD.labels_)
+print(model.labels_)"""
 
 
 """ edges_count = open("edges_count.txt","w")

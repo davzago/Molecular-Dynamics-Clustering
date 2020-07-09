@@ -13,3 +13,5 @@ Normalizing xx /= |x||x| may be slow for sparse data; it's fast in [scikit-learn
 
 Summary: start with cosine distance, but don't expect wonders on any old data.
 Successful metrics require evaluation, tuning, domain knowledge.
+
+If we use PCA the data gets normalized (with sklearn implementation just centered) by doing this we lose the sparsity of the matrix, the truncatdSVD method is efficient on sparse data hence it is computationally better 

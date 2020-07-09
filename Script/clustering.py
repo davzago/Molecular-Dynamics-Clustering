@@ -1,5 +1,6 @@
 from sklearn.cluster import AgglomerativeClustering
-from sklearn.metrics import silhouette_score, adjusted_rand_score
+from sklearn.metrics import silhouette_score, adjusted_rand_score , mutual_info_score, adjusted_mutual_info_score
+from sklearn.decomposition import PCA, TruncatedSVD, NMF
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
@@ -24,7 +25,7 @@ def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
 def clusterize(X):
     sil = dict()
     for k in range(4,51):
-       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
+       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, linkage='ward', affinity='euclidean').fit(X)
        sil[k] = silhouette_score(X, clustering.labels_)
     return sil
 
@@ -34,12 +35,12 @@ def clusterize(X):
 # X must be already shaped as a matrix of shape (n_samples, n_features)
 def get_best_cluster(X, sil):
     maximum = max(sil, key=sil.get)
-    print("maximum RMSD silhouette:" ,sil[maximum], "with", maximum, "clusters")
-    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, linkage='average', affinity='cosine').fit(X)
+    print("maximum contacts silhouette:" ,sil[maximum], "with", maximum, "clusters")
+    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, linkage='ward', affinity='euclidean').fit(X)
     plot_dendrogram(dendo_clustering, maximum)
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")
     plt.show()
-    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
+    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, linkage='ward', affinity='euclidean').fit(X)
     return model
 
 def reshape_matrix(X, n_snaps):
@@ -117,3 +118,16 @@ def get_best_cluster_RMSD(X, sil):
 
 def get_randIndex(contacts_labels, RMSD_labels):
     return adjusted_rand_score(contacts_labels, RMSD_labels)
+
+def PCA_transform(X):
+    return PCA(n_components=0.9).fit_transform(X)
+
+def SVD_transform(X):
+    svd = TruncatedSVD(n_components=75, random_state=42)
+    X_transformed = svd.fit_transform(X)
+    print("explained variance:", sum(svd.explained_variance_ratio_))
+    return X_transformed
+
+def NMF_transform(X):
+    nmf = NMF(n_components=50, init='random', random_state=42, max_iter=10)
+    return nmf.fit_transform(X)
