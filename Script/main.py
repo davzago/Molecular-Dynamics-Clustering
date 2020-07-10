@@ -45,6 +45,20 @@ for i in range(0, n_snaps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, node_position)
     # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
+pos = 0
+vector_position = dict()
+contact_list = []
+for i in range(0, n_snaps):
+    for s in snapSet[i].type_edges:
+        if(s not in vector_position):
+            contact_list.append(s)
+            vector_position[s] = pos
+            pos += 1
+n_distinct_edges = len(contact_list)
+vector_edges = np.zeros((n_snaps, n_distinct_edges))
+for i in range(0, n_snaps):
+    vector_edges[i] = matrix.calcVector(i, snapSet, vector_position)
+
 np.set_printoptions(threshold=sys.maxsize)
 no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
 

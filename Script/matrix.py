@@ -18,6 +18,14 @@ def calcMatrix(snap, snapSet, posList):
             matrix[posList[node1]][posList[node2]] += i[4]
     return matrix
 
+def calcVector(snap, snapSet, vector_position):
+    n = len(vector_position)
+    vector_edges = np.zeros(n)
+    for i in snapSet[snap].type_edges:
+        # if((abs(i[0][0] - i[1][0]) > 10) and (i[0][1] == i[1][1])):   # condizione per escludere contatti fra residui "vicini" nella sequenza
+        vector_edges[vector_position[i]] = i[3]
+    return vector_edges
+
 # plot the n-th snapshot's distance matrix
 # make sure that ../fig directory already exists
 # PS: SI CONSIDERANO SOLAMENTE I NODI CHE SONO PRESENTI NELL'MD, QUINDI NON MOLTO INDICATIVO VISIVAMENTE

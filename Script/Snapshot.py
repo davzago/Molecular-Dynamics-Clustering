@@ -15,5 +15,5 @@ class Snapshot:
     def addSimpleEdge(self, node1, node2):
         self.simple_edges.append(tuple([node1, node2]))
 
-    def addTypeEdge(self, node1, node2, interaction_type):
-        self.type_edges.append(tuple([node1, node2, interaction_type]))
+    def addTypeEdge(self, node1, node2, interaction_type, energy):
+        self.type_edges.append(tuple([node1, node2, interaction_type, energy]))
