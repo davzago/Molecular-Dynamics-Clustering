@@ -2,6 +2,7 @@ import subprocess
 import os
 import numpy as np
 import re
+import math
 
 def get_dense_array(path_to_pdb): # now cycle trough the files with os
   directory = os.fsencode(path_to_pdb)
@@ -43,3 +44,17 @@ def get_distance_matrix(path_to_pdb): # now cycle trough the files with os
       # resultFile.write(str(i) + "-" + str(j) + ": " + str(distance_array[c]) + "\n")
   # resultFile.close()
   return distance_array
+
+def get_distance_matrix_from_file(path_to_file):
+  matrix = []
+  with open(path_to_file) as f:
+    lines = [line.rstrip() for line in f]
+    size = int(math.sqrt(len(lines)))
+    matrix = np.zeros((size,size))
+    for line in lines:
+      split1 = line.split(':')
+      i = int(split1[0].split('-')[0])
+      j = int(split1[0].split('-')[1])
+      dist = float(split1[1])
+      matrix[i][j] = dist
+  return matrix

@@ -12,13 +12,13 @@ import RMSD
 
 parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
-parser.add_argument('pdb_path', help='Path to the pdb directory')
+parser.add_argument('RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script')
 parser.add_argument('-conf', help='Configuration file with algorithm parameters')
 parser.add_argument('-out_dir', help='Output directory')
 parser.add_argument('-tmp_dir', help='Temporary file directory')
 args = parser.parse_args()
 
-pdb_path = args.pdb_path 
+RMSD_path = args.RMSD_path 
 snapSet = parsing.parse2(args.data_path)
 n_snaps = len(snapSet)
 
@@ -56,10 +56,9 @@ Z = linkage(RMSD_array, method='ward')
 dendrogram(Z, 0)
 plt.show()
 plt.close() """
-RMSD_distance_matrix = RMSD.get_distance_matrix(pdb_path)
+RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
 sil_RMSD = clustering.clusterize_RMSD(RMSD_distance_matrix)
 model_RMSD = clustering.get_best_cluster_RMSD(RMSD_distance_matrix, sil_RMSD)
-
 
     
 
@@ -77,11 +76,12 @@ count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
 #X_PCA = clustering.PCA_transform(X)
-#X_SVD = clustering.SVD_transform(X)
+#X_SVD = clustering.SVD_transform(no_diag_snaps)
 X_NMF = clustering.NMF_transform(X)
 sil = clustering.clusterize(X_NMF)
 
 model = clustering.get_best_cluster(X_NMF, sil)
+#model = clustering.KMeans(n_clusters=4).fit(X_NMF)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
 mutal_info_score = clustering.mutual_info_score(model_RMSD.labels_,model.labels_)
 print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)

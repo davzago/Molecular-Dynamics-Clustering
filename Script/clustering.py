@@ -1,4 +1,4 @@
-from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import AgglomerativeClustering, KMeans
 from sklearn.metrics import silhouette_score, adjusted_rand_score , mutual_info_score, adjusted_mutual_info_score
 from sklearn.decomposition import PCA, TruncatedSVD, NMF
 import numpy as np
@@ -120,14 +120,17 @@ def get_randIndex(contacts_labels, RMSD_labels):
     return adjusted_rand_score(contacts_labels, RMSD_labels)
 
 def PCA_transform(X):
+    print("PCA")
     return PCA(n_components=0.9).fit_transform(X)
 
 def SVD_transform(X):
+    print("SVD")
     svd = TruncatedSVD(n_components=75, random_state=42)
     X_transformed = svd.fit_transform(X)
     print("explained variance:", sum(svd.explained_variance_ratio_))
     return X_transformed
 
 def NMF_transform(X):
-    nmf = NMF(n_components=50, init='random', random_state=42, max_iter=10)
+    print("NMF")
+    nmf = NMF(n_components=50, init='random', random_state=42, max_iter=20)
     return nmf.fit_transform(X)
