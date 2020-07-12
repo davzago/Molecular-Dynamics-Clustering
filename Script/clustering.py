@@ -1,9 +1,12 @@
 from sklearn.cluster import AgglomerativeClustering, KMeans
-from sklearn.metrics import silhouette_score, adjusted_rand_score , mutual_info_score, adjusted_mutual_info_score
+from sklearn.metrics import silhouette_score, adjusted_rand_score , normalized_mutual_info_score, adjusted_mutual_info_score
 from sklearn.decomposition import PCA, TruncatedSVD, NMF
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
+from scipy.stats import pearsonr
+from sklearn.preprocessing import StandardScaler
+from scipy.spatial.distance import pdist, squareform
 
 def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
     c_type = "euclidean_distance"
@@ -25,8 +28,8 @@ def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
 def clusterize(X):
     sil = dict()
     for k in range(4,51):
-       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, linkage='ward', affinity='euclidean').fit(X)
-       sil[k] = silhouette_score(X, clustering.labels_)
+       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
+       sil[k] = silhouette_score(X, clustering.labels_, metric='cosine')
     return sil
 
 # The first AgglomerativeClustering is used to create the dendogram since sklearn requires a distance_threshold to return
@@ -36,11 +39,12 @@ def clusterize(X):
 def get_best_cluster(X, sil):
     maximum = max(sil, key=sil.get)
     print("maximum contacts silhouette:" ,sil[maximum], "with", maximum, "clusters")
-    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, linkage='ward', affinity='euclidean').fit(X)
+    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0,
+                                                 linkage='average', affinity='cosine').fit(X)
     plot_dendrogram(dendo_clustering, maximum)
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")
     plt.show()
-    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, linkage='ward', affinity='euclidean').fit(X)
+    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
     return model
 
 def reshape_matrix(X, n_snaps):
@@ -132,5 +136,25 @@ def SVD_transform(X):
 
 def NMF_transform(X):
     print("NMF")
-    nmf = NMF(n_components=50, init='random', random_state=42, max_iter=20)
+    nmf = NMF(n_components=75, init='random', random_state=42, max_iter=20)
     return nmf.fit_transform(X)
+
+def pearson_affinity(M):
+    return 1 - np.array([[pearsonr(a,b)[0] for a in M] for b in M])
+
+def pearson_metric(x, y):
+    return 1 - pearsonr(x,y)[0]
+
+def test_metric(x ,y):
+    x_dict = dict()
+    y_dict = dict()
+    
+    for i in range(0,len(x)):
+        x_dict[i] = x[i]
+    for i in range(0,len(y)):
+        y_dict[i] = y[i]
+    x_sorted = sorted(x_dict.items(), key = lambda x: x[1])
+    y_sorted = sorted(y_dict.items(), key = lambda x: x[1])
+    print([x[0] for x in x_sorted])
+    print([y[0] for y in y_sorted])
+    

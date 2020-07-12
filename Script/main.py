@@ -58,6 +58,7 @@ n_distinct_edges = len(contact_list)
 vector_edges = np.zeros((n_snaps, n_distinct_edges))
 for i in range(0, n_snaps):
     vector_edges[i] = matrix.calcVector(i, snapSet, vector_position)
+scaled_vector = clustering.StandardScaler().fit_transform(vector_edges)
 
 np.set_printoptions(threshold=sys.maxsize)
 no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
@@ -71,6 +72,7 @@ dendrogram(Z, 0)
 plt.show()
 plt.close() """
 RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
+#RMSD_first_row = RMSD_distance_matrix[0].reshape((-1,1))
 sil_RMSD = clustering.clusterize_RMSD(RMSD_distance_matrix)
 model_RMSD = clustering.get_best_cluster_RMSD(RMSD_distance_matrix, sil_RMSD)
 
@@ -88,17 +90,21 @@ for i in range(0, len(snapSet)):
 
 count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
-X = clustering.reshape_matrix(matrix_snap, n_snaps)
-#X_PCA = clustering.PCA_transform(X)
-#X_SVD = clustering.SVD_transform(no_diag_snaps)
-X_NMF = clustering.NMF_transform(X)
-sil = clustering.clusterize(X_NMF)
 
-model = clustering.get_best_cluster(X_NMF, sil)
+"""X = clustering.squareform(clustering.pdist(vector_edges, metric='yule'))
+clustering.test_metric(X[0,:], RMSD_distance_matrix[0,:])"""
+
+X = clustering.reshape_matrix(matrix_snap, n_snaps)
+#X_PCA = clustering.PCA_transform(scaled_vector)
+#X_SVD = clustering.SVD_transform(vector_edges)
+#X_NMF = clustering.NMF_transform(vector_edges)
+sil = clustering.clusterize(X)
+
+model = clustering.get_best_cluster(X, sil)
 #model = clustering.KMeans(n_clusters=4).fit(X_NMF)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
-mutal_info_score = clustering.mutual_info_score(model_RMSD.labels_,model.labels_)
-print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
+mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
+#print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
 print("RandIndex between RMSD clustering and contact clustering:", rand_index)
 """print(model_RMSD.labels_)
 print(model.labels_)"""

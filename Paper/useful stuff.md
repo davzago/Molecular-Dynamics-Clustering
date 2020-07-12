@@ -15,3 +15,18 @@ Summary: start with cosine distance, but don't expect wonders on any old data.
 Successful metrics require evaluation, tuning, domain knowledge.
 
 If we use PCA the data gets normalized (with sklearn implementation just centered) by doing this we lose the sparsity of the matrix, the truncatdSVD method is efficient on sparse data hence it is computationally better 
+
+##### Yule(X)(frataxin):
+
+mutual info score between RMSD clustering and contact clustering: 0.5813110726407498
+RandIndex between RMSD clustering and contact clustering: 0.28832878188893984
+
+##### Hamming(X)(frataxin):
+
+maximum RMSD silhouette: 0.3109240910863861 with 4 clusters
+maximum contacts silhouette: 0.04939135337801037 with 9 clusters
+mutual info score between RMSD clustering and contact clustering: 0.5468241872908568
+RandIndex between RMSD clustering and contact clustering: 0.26418832867433695
+
+
+
