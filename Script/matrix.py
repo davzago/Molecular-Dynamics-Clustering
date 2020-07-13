@@ -14,9 +14,9 @@ def calcMatrix(snap, snapSet, posList):
             node1 = node2
             node2 = tmp
         if(matrix[posList[node1]][posList[node2]] == 0):
-            matrix[posList[node1]][posList[node2]] = i[4] #+ 0.1 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] = i[4] + 0.4 * abs(posList[node1] - posList[node2])
         else:
-            matrix[posList[node1]][posList[node2]] += i[4] #+ 0.1 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] += i[4] + 0. * abs(posList[node1] - posList[node2])
     return matrix
 
 def calcVector(snap, snapSet, vector_position):

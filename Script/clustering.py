@@ -162,20 +162,20 @@ def test_metric(x ,y):
     print([y[0] for y in y_sorted])
 
 def elbow(X):
-    model = AgglomerativeClustering(affinity='cityblock', linkage='average') # affinity='euclidean', linkage='ward'
+    model = AgglomerativeClustering(affinity='cosine', linkage='average') # affinity='euclidean', linkage='ward'
     visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
     visualizer.fit(X)
     visualizer.show()
     plt.clf()
     plt.close()
     dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0,
-                                                 linkage='average', affinity='cityblock').fit(X)
+                                                 linkage='average', affinity='cosine').fit(X)
     plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
     plt.grid(b=None)
     plt.show()
     plt.clf()
     plt.close()
-    return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cityblock', linkage='average').fit(X)
+    return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cosine', linkage='average').fit(X)
 
 def elbow_RMSD(X):
     model = AgglomerativeClustering(compute_full_tree=True, affinity='precomputed', linkage='average')

@@ -100,14 +100,14 @@ count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 clustering.test_metric(X[0,:], RMSD_distance_matrix[0,:])"""
 
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
-#X_PCA = clustering.PCA_transform(scaled_vector)
+X_PCA = clustering.PCA_transform(scaled_vector)
 #X_SVD = clustering.SVD_transform(vector_edges)
 #X_NMF = clustering.NMF_transform(vector_edges)
 #sil = clustering.clusterize(X)
 
 #model = clustering.get_best_cluster(X, sil)
 #model = clustering.KMeans(n_clusters=4).fit(X_NMF)
-model = clustering.elbow(vector_edges)
+model = clustering.elbow(X_PCA)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
 mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
 #print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
