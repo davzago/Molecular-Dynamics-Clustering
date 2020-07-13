@@ -39,11 +39,15 @@ for node in node_list:
     node_position[node] = pos
     pos += 1
 
+
+kernel_dim = 5
 n_nodes = len(node_list)
 matrix_snap = np.zeros((n_snaps,n_nodes,n_nodes))
+dense_snap = np.zeros((n_snaps,int(n_nodes/kernel_dim),int(n_nodes/kernel_dim)))
 for i in range(0, n_snaps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, node_position)
-    # matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
+    #dense_snap[i] = matrix.condense_matrix(matrix_snap[i], kernel_dim)
+    #matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
 pos = 0
 vector_position = dict()
@@ -74,7 +78,8 @@ plt.close() """
 RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
 #RMSD_first_row = RMSD_distance_matrix[0].reshape((-1,1))
 sil_RMSD = clustering.clusterize_RMSD(RMSD_distance_matrix)
-model_RMSD = clustering.get_best_cluster_RMSD(RMSD_distance_matrix, sil_RMSD)
+#model_RMSD = clustering.get_best_cluster_RMSD(RMSD_distance_matrix, sil_RMSD)
+model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
 
     
 
@@ -98,10 +103,11 @@ X = clustering.reshape_matrix(matrix_snap, n_snaps)
 #X_PCA = clustering.PCA_transform(scaled_vector)
 #X_SVD = clustering.SVD_transform(vector_edges)
 #X_NMF = clustering.NMF_transform(vector_edges)
-sil = clustering.clusterize(X)
+#sil = clustering.clusterize(X)
 
-model = clustering.get_best_cluster(X, sil)
+#model = clustering.get_best_cluster(X, sil)
 #model = clustering.KMeans(n_clusters=4).fit(X_NMF)
+model = clustering.elbow(vector_edges)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
 mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
 #print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)

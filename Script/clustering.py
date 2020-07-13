@@ -7,6 +7,7 @@ from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
 from scipy.stats import pearsonr
 from sklearn.preprocessing import StandardScaler
 from scipy.spatial.distance import pdist, squareform
+from yellowbrick.cluster import KElbowVisualizer
 
 def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
     c_type = "euclidean_distance"
@@ -117,6 +118,8 @@ def get_best_cluster_RMSD(X, sil):
     plot_dendrogram(dendo_clustering, maximum)
     plt.xlabel("Number of points in node (or index of point if no parenthesis).")
     plt.show()
+    plt.clf()
+    plt.close()
     model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, affinity='precomputed', linkage='average').fit(X)
     return model
 
@@ -157,4 +160,34 @@ def test_metric(x ,y):
     y_sorted = sorted(y_dict.items(), key = lambda x: x[1])
     print([x[0] for x in x_sorted])
     print([y[0] for y in y_sorted])
+
+def elbow(X):
+    model = AgglomerativeClustering(affinity='cityblock', linkage='average') # affinity='euclidean', linkage='ward'
+    visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
+    visualizer.fit(X)
+    visualizer.show()
+    plt.clf()
+    plt.close()
+    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0,
+                                                 linkage='average', affinity='cityblock').fit(X)
+    plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
+    plt.grid(b=None)
+    plt.show()
+    plt.clf()
+    plt.close()
+    return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cityblock', linkage='average').fit(X)
+
+def elbow_RMSD(X):
+    model = AgglomerativeClustering(compute_full_tree=True, affinity='precomputed', linkage='average')
+    visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
+    visualizer.fit(X)
+    visualizer.show()
+    plt.clf()
+    plt.close()
+    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, affinity='precomputed', linkage='average').fit(X)
+    plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
+    plt.grid(b=None)
+    plt.show()
+    plt.close()
+    return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='precomputed', linkage='average').fit(X)
     

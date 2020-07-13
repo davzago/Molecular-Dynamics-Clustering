@@ -14,9 +14,9 @@ def calcMatrix(snap, snapSet, posList):
             node1 = node2
             node2 = tmp
         if(matrix[posList[node1]][posList[node2]] == 0):
-            matrix[posList[node1]][posList[node2]] = i[4] + 0.1 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] = i[4] #+ 0.1 * abs(posList[node1] - posList[node2])
         else:
-            matrix[posList[node1]][posList[node2]] += i[4] + 0.1 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] += i[4] #+ 0.1 * abs(posList[node1] - posList[node2])
     return matrix
 
 def calcVector(snap, snapSet, vector_position):
@@ -24,7 +24,7 @@ def calcVector(snap, snapSet, vector_position):
     vector_edges = np.zeros(n)
     for i in snapSet[snap].type_edges:
         # if((abs(i[0][0] - i[1][0]) > 10) and (i[0][1] == i[1][1])):   # condizione per escludere contatti fra residui "vicini" nella sequenza
-        vector_edges[vector_position[i]] = i[3] + 0.1 * abs(i[0][0] - i[1][0])
+        vector_edges[vector_position[i]] = i[3] + 0.2 * abs(i[0][0] - i[1][0])
     return vector_edges
 
 # plot the n-th snapshot's distance matrix
@@ -33,8 +33,7 @@ def calcVector(snap, snapSet, vector_position):
 def plotDistanceMatrix(matrix_snap, snap, snapSet):
     plt.imshow(matrix_snap[snap], cmap='Reds', interpolation='nearest')
     plt.colorbar()
-    plt.show()
-    #plt.savefig("../fig/" + str(snap) + ".png")
+    plt.savefig("../fig/" + str(snap) + ".png")
     plt.close()
 
 def ignore_diagonal(matrix_snap):
@@ -46,5 +45,19 @@ def ignore_diagonal(matrix_snap):
                 contacts.append(matrix_snap[k,i,j])
         no_diagonal_snaps.append(contacts)
     return np.array(no_diagonal_snaps)
+
+def condense_matrix(snapshot, kernel_dim):
+    if snapshot.shape[0] % kernel_dim == 0:
+        new_dim = int(snapshot.shape[0] / kernel_dim)
+        dense_matrix = np.zeros((new_dim,new_dim))
+        for i in range(0,new_dim):
+            for j in range(0,new_dim):
+                for sub_i in range(0,kernel_dim):
+                    for sub_j in range(0,kernel_dim):  
+                        dense_matrix[i,j] += snapshot[i*kernel_dim+sub_i, j*kernel_dim+sub_j]
+        return dense_matrix
+    else: return np.zeros((3,3))  
+
+
 
 

@@ -28,5 +28,38 @@ maximum contacts silhouette: 0.04939135337801037 with 9 clusters
 mutual info score between RMSD clustering and contact clustering: 0.5468241872908568
 RandIndex between RMSD clustering and contact clustering: 0.26418832867433695
 
+##### Pearson(SVD(vector_edges))(antibody)
+
+maximum RMSD silhouette: 0.3998577252872483 with 4 clusters
+maximum contacts silhouette: 0.04784837788034364 with 50 clusters
+RandIndex between RMSD clustering and contact clustering: 0.01834481813657844
+
+##### Pearson(SVD(vector_edges))(vcb)
+
+maximum RMSD silhouette: 0.35786785137279037 with 8 clusters
+maximum contacts silhouette: 0.09848855327015538 with 4 clusters
+RandIndex between RMSD clustering and contact clustering: 0.38526946876946355
+
+##### Pearson(SVD(vector_edges))(frataxin)
+
+maximum RMSD silhouette: 0.3109240910863861 with 4 clusters
+maximum contacts silhouette: 0.13009748877357985 with 9 clusters
+RandIndex between RMSD clustering and contact clustering: 0.05760775683294067
+
+##### Yule(vector_edges)(antibody)
+
+maximum contacts silhouette: 0.06060011114161691 with 4 clusters
+RandIndex between RMSD clustering and contact clustering: -0.05408512232523832
+
+##### Yule(vector_edges)(vcb)
+
+maximum contacts silhouette: 0.1448083464926949 with 4 clusters
+RandIndex between RMSD clustering and contact clustering: 0.3748386167742934
+
+##### Yule(vector_edges)(frataxin)
+
+maximum contacts silhouette: 0.15613449042331937 with 4 clusters
+RandIndex between RMSD clustering and contact clustering: 0.10913881222964728
+
 
 
