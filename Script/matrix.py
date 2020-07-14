@@ -27,11 +27,25 @@ def calcVector(snap, snapSet, vector_position):
         vector_edges[vector_position[i]] = i[3] + 0.2 * abs(i[0][0] - i[1][0])
     return vector_edges
 
+def calcVectorSimple(snap, snapSet, vector_position_simple):
+    n = len(vector_position_simple)
+    vector_edges_simple = np.zeros(n)
+    for i in snapSet[snap].type_edges:
+        i_simple = tuple([i[0], i[1]])
+        # if((abs(i[0][0] - i[1][0]) > 10) and (i[0][1] == i[1][1])):   # condizione per escludere contatti fra residui "vicini" nella sequenza
+        if(vector_edges_simple[vector_position_simple[i_simple]] == 0):
+            vector_edges_simple[vector_position_simple[i_simple]] = i[3] + 0.2 * abs(i[0][0] - i[1][0])
+            # print(i_simple, " pos:", vector_position_simple[i_simple]," --- New --- ", vector_edges_simple[vector_position_simple[i_simple]])
+        else:
+            vector_edges_simple[vector_position_simple[i_simple]] += i[3] + 0.2 * abs(i[0][0] - i[1][0])
+            # print(i_simple, " pos:", vector_position_simple[i_simple]," --- Old --- ", vector_edges_simple[vector_position_simple[i_simple]])
+    return vector_edges_simple
+
 # plot the n-th snapshot's distance matrix
 # make sure that ../fig directory already exists
 # PS: SI CONSIDERANO SOLAMENTE I NODI CHE SONO PRESENTI NELL'MD, QUINDI NON MOLTO INDICATIVO VISIVAMENTE
 def plotDistanceMatrix(matrix_snap, snap, snapSet):
-    plt.imshow(matrix_snap[snap], cmap='Reds', interpolation='nearest')
+    plt.imshow(matrix_snap[snap], cmap='Reds', interpolation='nearest', vmin=0, vmax=30)
     plt.colorbar()
     plt.savefig("../fig/" + str(snap) + ".png")
     plt.close()

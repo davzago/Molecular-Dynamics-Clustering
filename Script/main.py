@@ -64,6 +64,21 @@ for i in range(0, n_snaps):
     vector_edges[i] = matrix.calcVector(i, snapSet, vector_position)
 scaled_vector = clustering.StandardScaler().fit_transform(vector_edges)
 
+pos = 0
+vector_position_simple = dict()
+contact_list_simple = []
+for i in range(0, n_snaps):
+    for s in snapSet[i].simple_edges:
+        if(s not in vector_position_simple):
+            contact_list_simple.append(s)
+            vector_position_simple[s] = pos
+            pos += 1
+n_distinct_edges_simple = len(contact_list_simple)
+vector_edges_simple = np.zeros((n_snaps, n_distinct_edges_simple))
+for i in range(0, 1):
+    vector_edges_simple[i] = matrix.calcVectorSimple(i, snapSet, vector_position_simple)
+
+
 np.set_printoptions(threshold=sys.maxsize)
 no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
 
