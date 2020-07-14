@@ -122,13 +122,19 @@ X_PCA = clustering.PCA_transform(scaled_vector)
 
 #model = clustering.get_best_cluster(X, sil)
 #model = clustering.KMeans(n_clusters=4).fit(X_NMF)
-model = clustering.elbow(X_PCA)
+model, best_k = clustering.elbow(X_PCA)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
 mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
 #print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
 print("RandIndex between RMSD clustering and contact clustering:", rand_index)
 """print(model_RMSD.labels_)
 print(model.labels_)"""
+clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)
+common_contacts = clustering.get_common_contacts(clusterized_snaps)
+print(len(clusterized_snaps))
+for i in range(0,len(common_contacts)):
+    matrix.plotDistanceMatrix(common_contacts, i)
+
 
 
 """ edges_count = open("edges_count.txt","w")

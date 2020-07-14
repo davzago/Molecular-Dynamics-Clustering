@@ -175,7 +175,7 @@ def elbow(X):
     plt.show()
     plt.clf()
     plt.close()
-    return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cosine', linkage='average').fit(X)
+    return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cosine', linkage='average').fit(X), visualizer.elbow_value_
 
 def elbow_RMSD(X):
     model = AgglomerativeClustering(compute_full_tree=True, affinity='precomputed', linkage='average')
@@ -190,4 +190,40 @@ def elbow_RMSD(X):
     plt.show()
     plt.close()
     return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='precomputed', linkage='average').fit(X)
+
+def clusterize_snaps(best_k, labels, matrix_snap):
+    clusterized_snaps = []
+    for k in range(0,best_k):
+        k_list = []
+        for i in range(0,len(labels)):
+            if labels[i]==k:
+                for m in range(0,len(matrix_snap[i])):
+                    for n in range(0,len(matrix_snap[i])):
+                        if matrix_snap[i,m,n] > 0:
+                            matrix_snap[i,m,n] = 1
+                k_list.append(matrix_snap[i])
+        clusterized_snaps.append(k_list)
+    return clusterized_snaps
+
+def get_common_contacts(clusterized_snaps):
+    common_snaps = []
+    for k in range(0,len(clusterized_snaps)):
+        n_snaps = len(clusterized_snaps[k])
+        n, _ = clusterized_snaps[k][0].shape
+        common_contacts = np.zeros((n,n))
+        for i in  range(0,n_snaps):
+            for j in range(0,n):
+                for w in range(0,n):
+                    common_contacts[j,w] += clusterized_snaps[k][i][j,w]
+        for j in range(0,n):
+            for w in range(0,n):
+                if common_contacts[j,w] < n_snaps:
+                    common_contacts[j,w] = 0
+                else:
+                    common_contacts[j,w] = 1
+        common_snaps.append(common_contacts)
+    return common_snaps
+                    
+
+
     
