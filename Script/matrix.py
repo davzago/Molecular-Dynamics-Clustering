@@ -14,9 +14,9 @@ def calcMatrix(snap, snapSet, posList):
             node1 = node2
             node2 = tmp
         if(matrix[posList[node1]][posList[node2]] == 0):
-            matrix[posList[node1]][posList[node2]] = i[4] + 0.4 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] = i[4] + 0.2 * abs(posList[node1] - posList[node2])
         else:
-            matrix[posList[node1]][posList[node2]] += i[4] + 0. * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] += i[4] + 0.2 * abs(posList[node1] - posList[node2])
     return matrix
 
 def calcVector(snap, snapSet, vector_position):
@@ -34,10 +34,10 @@ def calcVectorSimple(snap, snapSet, vector_position_simple):
         i_simple = tuple([i[0], i[1]])
         # if((abs(i[0][0] - i[1][0]) > 10) and (i[0][1] == i[1][1])):   # condizione per escludere contatti fra residui "vicini" nella sequenza
         if(vector_edges_simple[vector_position_simple[i_simple]] == 0):
-            vector_edges_simple[vector_position_simple[i_simple]] = i[3] + 0.2 * abs(i[0][0] - i[1][0])
+            vector_edges_simple[vector_position_simple[i_simple]] = i[3] + 0.1 * abs(i[0][0] - i[1][0])
             # print(i_simple, " pos:", vector_position_simple[i_simple]," --- New --- ", vector_edges_simple[vector_position_simple[i_simple]])
         else:
-            vector_edges_simple[vector_position_simple[i_simple]] += i[3] + 0.2 * abs(i[0][0] - i[1][0])
+            vector_edges_simple[vector_position_simple[i_simple]] += i[3] + 0.1 * abs(i[0][0] - i[1][0])
             # print(i_simple, " pos:", vector_position_simple[i_simple]," --- Old --- ", vector_edges_simple[vector_position_simple[i_simple]])
     return vector_edges_simple
 

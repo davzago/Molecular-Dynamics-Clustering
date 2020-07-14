@@ -8,6 +8,8 @@ from scipy.stats import pearsonr
 from sklearn.preprocessing import StandardScaler
 from scipy.spatial.distance import pdist, squareform
 from yellowbrick.cluster import KElbowVisualizer
+import warnings
+
 
 def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
     c_type = "euclidean_distance"
@@ -73,72 +75,19 @@ def plot_dendrogram(model, n_cluster, **kwargs):
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, color_threshold=linkage_matrix[len(linkage_matrix)-n_cluster][2]+0.00001, **kwargs) 
 
-""" def hamming_cluster(n_cluster, X, n_sanps, out_dir="fig/"):
-    c_type = "hamming_distance"
-    X = X.reshape((n_sanps,-1))
-    Z = linkage(X, metric='hamming')
-    clustering = fcluster(Z,t=5 , criterion='maxclust')
-    plt.title('Hierarchical Clustering Dendrogram')
-    dendrogram(Z)
-    plt.savefig(out_dir + "dendrogram_" + c_type + ".png")
-    plt.show()
-    plt.close()
-    return clustering """
-
-"""def plot_dendrogram_old(model, **kwargs):
-
-    # Children of hierarchical clustering
-    children = model.children_
-
-    # Distances between each pair of children
-    # Since we don't have this information, we can use a uniform one for plotting
-    distance = np.arange(children.shape[0])
-
-    # The number of observations contained in each cluster level
-    no_of_observations = np.arange(2, children.shape[0]+2)
-
-    # Create linkage matrix and then plot the dendrogram
-    linkage_matrix = np.column_stack([children, distance, no_of_observations]).astype(float)
-    print(linkage_matrix)
-
-    # Plot the corresponding dendrogram
-    dendrogram(linkage_matrix, **kwargs)"""
-
-def clusterize_RMSD(X):
-    sil = dict()
-    for k in range(4,51):
-       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, affinity='precomputed', linkage='average').fit(X)
-       sil[k] = silhouette_score(X, clustering.labels_)
-    return sil
-
-def get_best_cluster_RMSD(X, sil):
-    maximum = max(sil, key=sil.get)
-    print("maximum RMSD silhouette:", sil[maximum], "with", maximum, "clusters")
-    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, affinity='precomputed', linkage='average').fit(X)
-    plot_dendrogram(dendo_clustering, maximum)
-    plt.xlabel("Number of points in node (or index of point if no parenthesis).")
-    plt.show()
-    plt.clf()
-    plt.close()
-    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, affinity='precomputed', linkage='average').fit(X)
-    return model
 
 def get_randIndex(contacts_labels, RMSD_labels):
     return adjusted_rand_score(contacts_labels, RMSD_labels)
 
 def PCA_transform(X):
-    print("PCA")
     return PCA(n_components=0.9).fit_transform(X)
 
 def SVD_transform(X):
-    print("SVD")
     svd = TruncatedSVD(n_components=75, random_state=42)
     X_transformed = svd.fit_transform(X)
-    print("explained variance:", sum(svd.explained_variance_ratio_))
     return X_transformed
 
 def NMF_transform(X):
-    print("NMF")
     nmf = NMF(n_components=75, init='random', random_state=42, max_iter=20)
     return nmf.fit_transform(X)
 
@@ -161,18 +110,18 @@ def test_metric(x ,y):
     print([x[0] for x in x_sorted])
     print([y[0] for y in y_sorted])
 
+
 def elbow(X):
     model = AgglomerativeClustering(affinity='cosine', linkage='average') # affinity='euclidean', linkage='ward'
     visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
     visualizer.fit(X)
-    visualizer.show()
     plt.clf()
     plt.close()
     dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0,
                                                  linkage='average', affinity='cosine').fit(X)
     plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
     plt.grid(b=None)
-    plt.show()
+    #plt.show()
     plt.clf()
     plt.close()
     return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cosine', linkage='average').fit(X), visualizer.elbow_value_
@@ -181,13 +130,12 @@ def elbow_RMSD(X):
     model = AgglomerativeClustering(compute_full_tree=True, affinity='precomputed', linkage='average')
     visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
     visualizer.fit(X)
-    visualizer.show()
     plt.clf()
     plt.close()
     dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0, affinity='precomputed', linkage='average').fit(X)
     plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
     plt.grid(b=None)
-    plt.show()
+    #plt.show()
     plt.close()
     return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='precomputed', linkage='average').fit(X)
 

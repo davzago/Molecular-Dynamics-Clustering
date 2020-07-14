@@ -4,11 +4,14 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
 import operator
 import sys
+import warnings
+
 
 import parsing
 import matrix
 import clustering
 import RMSD
+
 
 parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
@@ -40,13 +43,10 @@ for node in node_list:
     pos += 1
 
 
-kernel_dim = 5
 n_nodes = len(node_list)
 matrix_snap = np.zeros((n_snaps,n_nodes,n_nodes))
-dense_snap = np.zeros((n_snaps,int(n_nodes/kernel_dim),int(n_nodes/kernel_dim)))
 for i in range(0, n_snaps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, node_position)
-    #dense_snap[i] = matrix.condense_matrix(matrix_snap[i], kernel_dim)
     #matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
 pos = 0
@@ -62,7 +62,6 @@ n_distinct_edges = len(contact_list)
 vector_edges = np.zeros((n_snaps, n_distinct_edges))
 for i in range(0, n_snaps):
     vector_edges[i] = matrix.calcVector(i, snapSet, vector_position)
-scaled_vector = clustering.StandardScaler().fit_transform(vector_edges)
 
 pos = 0
 vector_position_simple = dict()
@@ -75,26 +74,21 @@ for i in range(0, n_snaps):
             pos += 1
 n_distinct_edges_simple = len(contact_list_simple)
 vector_edges_simple = np.zeros((n_snaps, n_distinct_edges_simple))
-for i in range(0, 1):
+for i in range(0, n_snaps):
     vector_edges_simple[i] = matrix.calcVectorSimple(i, snapSet, vector_position_simple)
+
+scaled_vector = clustering.StandardScaler().fit_transform(vector_edges_simple)
 
 
 np.set_printoptions(threshold=sys.maxsize)
 no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
 
-#labels = clustering.euclidean_cluster(4, matrix_snap, n_sanps, "../dendrogram/", 80)
-#print(labels)
-#print(n_sanps,labels.shape)
-""" RMSD_array = RMSD.get_dense_array(pdb_path)
-Z = linkage(RMSD_array, method='ward')
-dendrogram(Z, 0)
-plt.show()
-plt.close() """
+
 RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
-#RMSD_first_row = RMSD_distance_matrix[0].reshape((-1,1))
-sil_RMSD = clustering.clusterize_RMSD(RMSD_distance_matrix)
-#model_RMSD = clustering.get_best_cluster_RMSD(RMSD_distance_matrix, sil_RMSD)
-model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
+with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
+
 
     
 
@@ -116,24 +110,19 @@ clustering.test_metric(X[0,:], RMSD_distance_matrix[0,:])"""
 
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
 X_PCA = clustering.PCA_transform(scaled_vector)
-#X_SVD = clustering.SVD_transform(vector_edges)
-#X_NMF = clustering.NMF_transform(vector_edges)
-#sil = clustering.clusterize(X)
+#X_SVD = clustering.SVD_transform(vector_edges_simple)
 
-#model = clustering.get_best_cluster(X, sil)
-#model = clustering.KMeans(n_clusters=4).fit(X_NMF)
-model, best_k = clustering.elbow(X_PCA)
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    model, best_k = clustering.elbow(X_PCA)
 rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
 mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
 #print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
 print("RandIndex between RMSD clustering and contact clustering:", rand_index)
-"""print(model_RMSD.labels_)
-print(model.labels_)"""
-clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)
-common_contacts = clustering.get_common_contacts(clusterized_snaps)
-important_list = clustering.get_important_contacts(common_contacts)
-print(important_list)
 
+"""clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)
+common_contacts = clustering.get_common_contacts(clusterized_snaps)
+important_list = clustering.get_important_contacts(common_contacts)"""
 
 """ edges_count = open("edges_count.txt","w")
 for i in count_sorted:
