@@ -217,12 +217,29 @@ def get_common_contacts(clusterized_snaps):
                     common_contacts[j,w] += clusterized_snaps[k][i][j,w]
         for j in range(0,n):
             for w in range(0,n):
-                if common_contacts[j,w] < n_snaps:
+                if common_contacts[j,w] < n_snaps/2:
                     common_contacts[j,w] = 0
                 else:
                     common_contacts[j,w] = 1
         common_snaps.append(common_contacts)
     return common_snaps
+
+def get_important_contacts(common_contacts):
+    important_contacts = []
+    k = len(common_contacts)
+    n, _ = common_contacts[0].shape
+    for x in range(0,k):
+        for i in range(0,n):
+                for j in range(0,n):
+                    w = 0
+                    for y in range(0,k):
+                        if x != y and common_contacts[x][i,j] == 1 and common_contacts[y][i,j] == 0:
+                            w += 1
+                    if w == k-1:
+                        important_contacts.append((i,j,x))
+    return important_contacts
+                    
+
                     
 
 

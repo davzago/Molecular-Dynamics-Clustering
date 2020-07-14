@@ -131,10 +131,8 @@ print("RandIndex between RMSD clustering and contact clustering:", rand_index)
 print(model.labels_)"""
 clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)
 common_contacts = clustering.get_common_contacts(clusterized_snaps)
-print(len(clusterized_snaps))
-for i in range(0,len(common_contacts)):
-    matrix.plotDistanceMatrix(common_contacts, i)
-
+important_list = clustering.get_important_contacts(common_contacts)
+print(important_list)
 
 
 """ edges_count = open("edges_count.txt","w")
