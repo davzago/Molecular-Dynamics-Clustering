@@ -18,7 +18,6 @@ parser = argparse.ArgumentParser(description='Hierarchical clustering using RING
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
 parser.add_argument('-RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script (if not calculated use -path_to_pdb)')
 parser.add_argument('-path_to_pdb', help='The path to the pdb folder that is used to calculate the RMSD (to use if the RMSD has not already been calculated) the result will be put in a file named RMSD.txt in the folder named like the data_path in out_dir, also to use this command the TMscore.cpp is necessary')
-parser.add_argument('-conf', help='Configuration file with algorithm parameters')
 parser.add_argument('-out_dir', help='Output directory', default='../out_dir')
 parser.add_argument('-tmp_dir', help='Temporary file directory', default='../tmp_dir')
 args = parser.parse_args()
@@ -28,7 +27,7 @@ n_snaps = len(snapSet)
 
 # define the name of the directory to be created
 splits = args.data_path.split('/')
-path = "../out_dir/" + splits[len(splits)-1].split('.')[0]
+path = args.out_dir + "/" + splits[len(splits)-1].split('.')[0]
 
 try:
     os.mkdir(path)
@@ -92,13 +91,6 @@ for i in range(0, n_snaps):
 scaled_vector = clustering.StandardScaler().fit_transform(vector_edges_simple)
 
 
-np.set_printoptions(threshold=sys.maxsize)
-no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
-
-
-
-
-
     
 
 ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
@@ -145,7 +137,7 @@ important_list = clustering.get_important_contacts(common_contacts)
 
 matrix.output_labels(model.labels_, path)
 matrix.output_common_contacts(common_contacts, path)
-matrix.output_imprtant_contacts(important_list, node_list, path)
+matrix.output_imprtant_contacts(important_list, node_position, path)
 
 """ edges_count = open("edges_count.txt","w")
 for i in count_sorted:
