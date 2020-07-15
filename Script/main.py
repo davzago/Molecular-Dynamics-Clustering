@@ -91,26 +91,6 @@ scaled_vector = clustering.StandardScaler().fit_transform(vector_edges_simple)
 count_sorted = matrix.edge_count(snapSet)
 matrix.output_edge_count(count_sorted, path)
 
-""" ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
-# key dict sono edges, value sono occorrenze dell'edge key (valuta residue1, residue2, interaction)
-count = dict()
-for i in range(0, len(snapSet)):
-    for s in snapSet[i].edges:
-        if((str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])) in count):
-            count[str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])] += 1
-        else:
-            count[str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])] = 1
-
-count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
-
-edges_count = open("edges_count.txt","w")
-for i in count_sorted:
-    edges_count.write(str(i[0]) + ": " + str(i[1]) + "\n")
-edges_count.close() """
-
-"""distance matrix = clustering.squareform(clustering.pdist(vector_edges, metric='yule'))
-clustering.test_metric(X[0,:], RMSD_distance_matrix[0,:])"""
-
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
 X_PCA = clustering.PCA_transform(scaled_vector)
 #X_SVD = clustering.SVD_transform(vector_edges_simple)

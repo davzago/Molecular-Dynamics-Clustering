@@ -1,281 +1,281 @@
-14 - 29 in cluster 0
-23 - 164 in cluster 0
-227 - 248 in cluster 0
-229 - 233 in cluster 0
-309 - 313 in cluster 0
-311 - 314 in cluster 0
-323 - 446 in cluster 0
-345 - 388 in cluster 0
-415 - 451 in cluster 0
-417 - 465 in cluster 0
-1 - 33 in cluster 1
-2 - 445 in cluster 1
-8 - 32 in cluster 1
-328 - 396 in cluster 1
-328 - 431 in cluster 1
-470 - 473 in cluster 1
-326 - 394 in cluster 2
-326 - 397 in cluster 2
-0 - 4 in cluster 3
-0 - 5 in cluster 3
-1 - 4 in cluster 3
-1 - 5 in cluster 3
-2 - 6 in cluster 3
-100 - 159 in cluster 3
-103 - 152 in cluster 3
-167 - 176 in cluster 3
-231 - 234 in cluster 3
-398 - 403 in cluster 3
-455 - 458 in cluster 3
-462 - 473 in cluster 3
-46 - 52 in cluster 4
-417 - 469 in cluster 4
-421 - 470 in cluster 4
-460 - 476 in cluster 4
-461 - 475 in cluster 4
-462 - 474 in cluster 4
-5 - 334 in cluster 5
-6 - 332 in cluster 5
-27 - 329 in cluster 5
-40 - 99 in cluster 5
-324 - 459 in cluster 5
-330 - 369 in cluster 5
-398 - 404 in cluster 5
-429 - 439 in cluster 5
-4 - 7 in cluster 6
-70 - 73 in cluster 6
-70 - 313 in cluster 6
-103 - 347 in cluster 6
-116 - 214 in cluster 6
-175 - 334 in cluster 6
-470 - 474 in cluster 6
-0 - 68 in cluster 7
-2 - 33 in cluster 7
-12 - 33 in cluster 7
-75 - 160 in cluster 7
-109 - 469 in cluster 7
-123 - 318 in cluster 7
-155 - 465 in cluster 7
-185 - 195 in cluster 7
-301 - 319 in cluster 7
-301 - 320 in cluster 7
-358 - 391 in cluster 7
-419 - 429 in cluster 7
-3 - 92 in cluster 8
-12 - 32 in cluster 8
-30 - 402 in cluster 8
-82 - 93 in cluster 8
-243 - 253 in cluster 8
-300 - 323 in cluster 8
-332 - 360 in cluster 8
-334 - 359 in cluster 8
-334 - 361 in cluster 8
-456 - 476 in cluster 8
-5 - 9 in cluster 9
-8 - 83 in cluster 9
-8 - 84 in cluster 9
-9 - 82 in cluster 9
-9 - 83 in cluster 9
-10 - 82 in cluster 9
-10 - 84 in cluster 9
-17 - 369 in cluster 9
-30 - 39 in cluster 9
-43 - 94 in cluster 9
-50 - 53 in cluster 9
-50 - 56 in cluster 9
-53 - 56 in cluster 9
-68 - 77 in cluster 9
-69 - 138 in cluster 9
-70 - 138 in cluster 9
-73 - 157 in cluster 9
-74 - 157 in cluster 9
-84 - 93 in cluster 9
-86 - 90 in cluster 9
-101 - 415 in cluster 9
-108 - 214 in cluster 9
-109 - 383 in cluster 9
-110 - 382 in cluster 9
-111 - 214 in cluster 9
-122 - 303 in cluster 9
-128 - 207 in cluster 9
-128 - 211 in cluster 9
-129 - 204 in cluster 9
-136 - 140 in cluster 9
-136 - 200 in cluster 9
-143 - 185 in cluster 9
-143 - 189 in cluster 9
-146 - 165 in cluster 9
-148 - 167 in cluster 9
-149 - 162 in cluster 9
-149 - 163 in cluster 9
-166 - 180 in cluster 9
-167 - 181 in cluster 9
-167 - 349 in cluster 9
-167 - 352 in cluster 9
-168 - 178 in cluster 9
-169 - 181 in cluster 9
-169 - 183 in cluster 9
-170 - 176 in cluster 9
-171 - 175 in cluster 9
-171 - 177 in cluster 9
-171 - 179 in cluster 9
-171 - 183 in cluster 9
-171 - 219 in cluster 9
-171 - 220 in cluster 9
-179 - 182 in cluster 9
-179 - 221 in cluster 9
-188 - 194 in cluster 9
-193 - 246 in cluster 9
-208 - 275 in cluster 9
-218 - 280 in cluster 9
-224 - 248 in cluster 9
-224 - 253 in cluster 9
-231 - 242 in cluster 9
-232 - 257 in cluster 9
-236 - 255 in cluster 9
-239 - 251 in cluster 9
-259 - 263 in cluster 9
-261 - 280 in cluster 9
-316 - 319 in cluster 9
-317 - 320 in cluster 9
-320 - 323 in cluster 9
-321 - 324 in cluster 9
-321 - 325 in cluster 9
-322 - 325 in cluster 9
-348 - 381 in cluster 9
-353 - 388 in cluster 9
-372 - 394 in cluster 9
-377 - 422 in cluster 9
-385 - 422 in cluster 9
-389 - 394 in cluster 9
-404 - 433 in cluster 9
-408 - 438 in cluster 9
-459 - 462 in cluster 9
-465 - 469 in cluster 9
-469 - 473 in cluster 9
-471 - 475 in cluster 9
-49 - 89 in cluster 10
-54 - 59 in cluster 10
-55 - 95 in cluster 10
-70 - 312 in cluster 10
-87 - 92 in cluster 10
-88 - 92 in cluster 10
-126 - 314 in cluster 10
-130 - 314 in cluster 10
-132 - 197 in cluster 10
-294 - 314 in cluster 10
-295 - 315 in cluster 10
-295 - 317 in cluster 10
-300 - 316 in cluster 10
-302 - 308 in cluster 10
-328 - 331 in cluster 10
-342 - 373 in cluster 10
-363 - 392 in cluster 10
-375 - 406 in cluster 10
-403 - 434 in cluster 10
-456 - 475 in cluster 10
-457 - 472 in cluster 10
-459 - 477 in cluster 10
-464 - 478 in cluster 10
-3 - 88 in cluster 11
-4 - 85 in cluster 11
-4 - 92 in cluster 11
-5 - 92 in cluster 11
-13 - 326 in cluster 11
-19 - 164 in cluster 11
-23 - 163 in cluster 11
-32 - 326 in cluster 11
-65 - 69 in cluster 11
-70 - 324 in cluster 11
-73 - 323 in cluster 11
-103 - 378 in cluster 11
-117 - 317 in cluster 11
-124 - 156 in cluster 11
-141 - 200 in cluster 11
-153 - 321 in cluster 11
-155 - 319 in cluster 11
-155 - 321 in cluster 11
-157 - 321 in cluster 11
-251 - 256 in cluster 11
-293 - 299 in cluster 11
-294 - 299 in cluster 11
-326 - 401 in cluster 11
-334 - 362 in cluster 11
-340 - 352 in cluster 11
-429 - 459 in cluster 11
-457 - 463 in cluster 11
-458 - 463 in cluster 11
-460 - 463 in cluster 11
-462 - 467 in cluster 11
-466 - 470 in cluster 11
-18 - 167 in cluster 12
-24 - 43 in cluster 12
-50 - 87 in cluster 12
-50 - 88 in cluster 12
-57 - 81 in cluster 12
-61 - 79 in cluster 12
-70 - 317 in cluster 12
-146 - 207 in cluster 12
-177 - 326 in cluster 12
-213 - 265 in cluster 12
-227 - 282 in cluster 12
-239 - 250 in cluster 12
-279 - 287 in cluster 12
-326 - 351 in cluster 12
-326 - 352 in cluster 12
-326 - 355 in cluster 12
-375 - 399 in cluster 12
-456 - 461 in cluster 12
-456 - 473 in cluster 12
-456 - 477 in cluster 12
-457 - 473 in cluster 12
-460 - 480 in cluster 12
-462 - 469 in cluster 12
-462 - 470 in cluster 12
-462 - 472 in cluster 12
-462 - 478 in cluster 12
-463 - 468 in cluster 12
-464 - 476 in cluster 12
-472 - 477 in cluster 12
-7 - 10 in cluster 13
-7 - 13 in cluster 13
-155 - 466 in cluster 13
-167 - 179 in cluster 13
-182 - 221 in cluster 13
-416 - 470 in cluster 13
-450 - 465 in cluster 13
-464 - 468 in cluster 13
-1 - 65 in cluster 14
-1 - 83 in cluster 14
-5 - 80 in cluster 14
-6 - 80 in cluster 14
-6 - 82 in cluster 14
-7 - 11 in cluster 14
-9 - 33 in cluster 14
-72 - 159 in cluster 14
-172 - 329 in cluster 14
-175 - 330 in cluster 14
-192 - 247 in cluster 14
-230 - 282 in cluster 14
-332 - 335 in cluster 14
-336 - 360 in cluster 14
-411 - 455 in cluster 14
-4 - 435 in cluster 15
-6 - 434 in cluster 15
-8 - 401 in cluster 15
-10 - 13 in cluster 15
-18 - 347 in cluster 15
-46 - 90 in cluster 15
-73 - 77 in cluster 15
-75 - 131 in cluster 15
-104 - 124 in cluster 15
-294 - 300 in cluster 15
-306 - 322 in cluster 15
-309 - 322 in cluster 15
-329 - 332 in cluster 15
-335 - 366 in cluster 15
-346 - 378 in cluster 15
-420 - 472 in cluster 15
-450 - 462 in cluster 15
-453 - 460 in cluster 15
-461 - 477 in cluster 15
+(15, 'A') - (30, 'A') in cluster 0
+(24, 'A') - (165, 'A') in cluster 0
+(228, 'A') - (249, 'A') in cluster 0
+(230, 'A') - (234, 'A') in cluster 0
+(310, 'A') - (314, 'A') in cluster 0
+(312, 'A') - (315, 'A') in cluster 0
+(324, 'A') - (121, 'B') in cluster 0
+(20, 'B') - (63, 'B') in cluster 0
+(90, 'B') - (126, 'B') in cluster 0
+(92, 'B') - (140, 'B') in cluster 0
+(2, 'A') - (34, 'A') in cluster 1
+(3, 'A') - (120, 'B') in cluster 1
+(9, 'A') - (33, 'A') in cluster 1
+(3, 'B') - (71, 'B') in cluster 1
+(3, 'B') - (106, 'B') in cluster 1
+(145, 'B') - (148, 'B') in cluster 1
+(1, 'B') - (69, 'B') in cluster 2
+(1, 'B') - (72, 'B') in cluster 2
+(1, 'A') - (5, 'A') in cluster 3
+(1, 'A') - (6, 'A') in cluster 3
+(2, 'A') - (5, 'A') in cluster 3
+(2, 'A') - (6, 'A') in cluster 3
+(3, 'A') - (7, 'A') in cluster 3
+(101, 'A') - (160, 'A') in cluster 3
+(104, 'A') - (153, 'A') in cluster 3
+(168, 'A') - (177, 'A') in cluster 3
+(232, 'A') - (235, 'A') in cluster 3
+(73, 'B') - (78, 'B') in cluster 3
+(130, 'B') - (133, 'B') in cluster 3
+(137, 'B') - (148, 'B') in cluster 3
+(47, 'A') - (53, 'A') in cluster 4
+(92, 'B') - (144, 'B') in cluster 4
+(96, 'B') - (145, 'B') in cluster 4
+(135, 'B') - (151, 'B') in cluster 4
+(136, 'B') - (150, 'B') in cluster 4
+(137, 'B') - (149, 'B') in cluster 4
+(6, 'A') - (9, 'B') in cluster 5
+(7, 'A') - (7, 'B') in cluster 5
+(28, 'A') - (4, 'B') in cluster 5
+(41, 'A') - (100, 'A') in cluster 5
+(325, 'A') - (134, 'B') in cluster 5
+(5, 'B') - (44, 'B') in cluster 5
+(73, 'B') - (79, 'B') in cluster 5
+(104, 'B') - (114, 'B') in cluster 5
+(5, 'A') - (8, 'A') in cluster 6
+(71, 'A') - (74, 'A') in cluster 6
+(71, 'A') - (314, 'A') in cluster 6
+(104, 'A') - (22, 'B') in cluster 6
+(117, 'A') - (215, 'A') in cluster 6
+(176, 'A') - (9, 'B') in cluster 6
+(145, 'B') - (149, 'B') in cluster 6
+(1, 'A') - (69, 'A') in cluster 7
+(3, 'A') - (34, 'A') in cluster 7
+(13, 'A') - (34, 'A') in cluster 7
+(76, 'A') - (161, 'A') in cluster 7
+(110, 'A') - (144, 'B') in cluster 7
+(124, 'A') - (319, 'A') in cluster 7
+(156, 'A') - (140, 'B') in cluster 7
+(186, 'A') - (196, 'A') in cluster 7
+(302, 'A') - (320, 'A') in cluster 7
+(302, 'A') - (321, 'A') in cluster 7
+(33, 'B') - (66, 'B') in cluster 7
+(94, 'B') - (104, 'B') in cluster 7
+(4, 'A') - (93, 'A') in cluster 8
+(13, 'A') - (33, 'A') in cluster 8
+(31, 'A') - (77, 'B') in cluster 8
+(83, 'A') - (94, 'A') in cluster 8
+(244, 'A') - (254, 'A') in cluster 8
+(301, 'A') - (324, 'A') in cluster 8
+(7, 'B') - (35, 'B') in cluster 8
+(9, 'B') - (34, 'B') in cluster 8
+(9, 'B') - (36, 'B') in cluster 8
+(131, 'B') - (151, 'B') in cluster 8
+(6, 'A') - (10, 'A') in cluster 9
+(9, 'A') - (84, 'A') in cluster 9
+(9, 'A') - (85, 'A') in cluster 9
+(10, 'A') - (83, 'A') in cluster 9
+(10, 'A') - (84, 'A') in cluster 9
+(11, 'A') - (83, 'A') in cluster 9
+(11, 'A') - (85, 'A') in cluster 9
+(18, 'A') - (44, 'B') in cluster 9
+(31, 'A') - (40, 'A') in cluster 9
+(44, 'A') - (95, 'A') in cluster 9
+(51, 'A') - (54, 'A') in cluster 9
+(51, 'A') - (57, 'A') in cluster 9
+(54, 'A') - (57, 'A') in cluster 9
+(69, 'A') - (78, 'A') in cluster 9
+(70, 'A') - (139, 'A') in cluster 9
+(71, 'A') - (139, 'A') in cluster 9
+(74, 'A') - (158, 'A') in cluster 9
+(75, 'A') - (158, 'A') in cluster 9
+(85, 'A') - (94, 'A') in cluster 9
+(87, 'A') - (91, 'A') in cluster 9
+(102, 'A') - (90, 'B') in cluster 9
+(109, 'A') - (215, 'A') in cluster 9
+(110, 'A') - (58, 'B') in cluster 9
+(111, 'A') - (57, 'B') in cluster 9
+(112, 'A') - (215, 'A') in cluster 9
+(123, 'A') - (304, 'A') in cluster 9
+(129, 'A') - (208, 'A') in cluster 9
+(129, 'A') - (212, 'A') in cluster 9
+(130, 'A') - (205, 'A') in cluster 9
+(137, 'A') - (141, 'A') in cluster 9
+(137, 'A') - (201, 'A') in cluster 9
+(144, 'A') - (186, 'A') in cluster 9
+(144, 'A') - (190, 'A') in cluster 9
+(147, 'A') - (166, 'A') in cluster 9
+(149, 'A') - (168, 'A') in cluster 9
+(150, 'A') - (163, 'A') in cluster 9
+(150, 'A') - (164, 'A') in cluster 9
+(167, 'A') - (181, 'A') in cluster 9
+(168, 'A') - (182, 'A') in cluster 9
+(168, 'A') - (24, 'B') in cluster 9
+(168, 'A') - (27, 'B') in cluster 9
+(169, 'A') - (179, 'A') in cluster 9
+(170, 'A') - (182, 'A') in cluster 9
+(170, 'A') - (184, 'A') in cluster 9
+(171, 'A') - (177, 'A') in cluster 9
+(172, 'A') - (176, 'A') in cluster 9
+(172, 'A') - (178, 'A') in cluster 9
+(172, 'A') - (180, 'A') in cluster 9
+(172, 'A') - (184, 'A') in cluster 9
+(172, 'A') - (220, 'A') in cluster 9
+(172, 'A') - (221, 'A') in cluster 9
+(180, 'A') - (183, 'A') in cluster 9
+(180, 'A') - (222, 'A') in cluster 9
+(189, 'A') - (195, 'A') in cluster 9
+(194, 'A') - (247, 'A') in cluster 9
+(209, 'A') - (276, 'A') in cluster 9
+(219, 'A') - (281, 'A') in cluster 9
+(225, 'A') - (249, 'A') in cluster 9
+(225, 'A') - (254, 'A') in cluster 9
+(232, 'A') - (243, 'A') in cluster 9
+(233, 'A') - (258, 'A') in cluster 9
+(237, 'A') - (256, 'A') in cluster 9
+(240, 'A') - (252, 'A') in cluster 9
+(260, 'A') - (264, 'A') in cluster 9
+(262, 'A') - (281, 'A') in cluster 9
+(317, 'A') - (320, 'A') in cluster 9
+(318, 'A') - (321, 'A') in cluster 9
+(321, 'A') - (324, 'A') in cluster 9
+(322, 'A') - (325, 'A') in cluster 9
+(322, 'A') - (326, 'A') in cluster 9
+(323, 'A') - (326, 'A') in cluster 9
+(23, 'B') - (56, 'B') in cluster 9
+(28, 'B') - (63, 'B') in cluster 9
+(47, 'B') - (69, 'B') in cluster 9
+(52, 'B') - (97, 'B') in cluster 9
+(60, 'B') - (97, 'B') in cluster 9
+(64, 'B') - (69, 'B') in cluster 9
+(79, 'B') - (108, 'B') in cluster 9
+(83, 'B') - (113, 'B') in cluster 9
+(134, 'B') - (137, 'B') in cluster 9
+(140, 'B') - (144, 'B') in cluster 9
+(144, 'B') - (148, 'B') in cluster 9
+(146, 'B') - (150, 'B') in cluster 9
+(50, 'A') - (90, 'A') in cluster 10
+(55, 'A') - (60, 'A') in cluster 10
+(56, 'A') - (96, 'A') in cluster 10
+(71, 'A') - (313, 'A') in cluster 10
+(88, 'A') - (93, 'A') in cluster 10
+(89, 'A') - (93, 'A') in cluster 10
+(127, 'A') - (315, 'A') in cluster 10
+(131, 'A') - (315, 'A') in cluster 10
+(133, 'A') - (198, 'A') in cluster 10
+(295, 'A') - (315, 'A') in cluster 10
+(296, 'A') - (316, 'A') in cluster 10
+(296, 'A') - (318, 'A') in cluster 10
+(301, 'A') - (317, 'A') in cluster 10
+(303, 'A') - (309, 'A') in cluster 10
+(3, 'B') - (6, 'B') in cluster 10
+(17, 'B') - (48, 'B') in cluster 10
+(38, 'B') - (67, 'B') in cluster 10
+(50, 'B') - (81, 'B') in cluster 10
+(78, 'B') - (109, 'B') in cluster 10
+(131, 'B') - (150, 'B') in cluster 10
+(132, 'B') - (147, 'B') in cluster 10
+(134, 'B') - (152, 'B') in cluster 10
+(139, 'B') - (153, 'B') in cluster 10
+(4, 'A') - (89, 'A') in cluster 11
+(5, 'A') - (86, 'A') in cluster 11
+(5, 'A') - (93, 'A') in cluster 11
+(6, 'A') - (93, 'A') in cluster 11
+(14, 'A') - (1, 'B') in cluster 11
+(20, 'A') - (165, 'A') in cluster 11
+(24, 'A') - (164, 'A') in cluster 11
+(33, 'A') - (1, 'B') in cluster 11
+(66, 'A') - (70, 'A') in cluster 11
+(71, 'A') - (325, 'A') in cluster 11
+(74, 'A') - (324, 'A') in cluster 11
+(104, 'A') - (53, 'B') in cluster 11
+(118, 'A') - (318, 'A') in cluster 11
+(125, 'A') - (157, 'A') in cluster 11
+(142, 'A') - (201, 'A') in cluster 11
+(154, 'A') - (322, 'A') in cluster 11
+(156, 'A') - (320, 'A') in cluster 11
+(156, 'A') - (322, 'A') in cluster 11
+(158, 'A') - (322, 'A') in cluster 11
+(252, 'A') - (257, 'A') in cluster 11
+(294, 'A') - (300, 'A') in cluster 11
+(295, 'A') - (300, 'A') in cluster 11
+(1, 'B') - (76, 'B') in cluster 11
+(9, 'B') - (37, 'B') in cluster 11
+(15, 'B') - (27, 'B') in cluster 11
+(104, 'B') - (134, 'B') in cluster 11
+(132, 'B') - (138, 'B') in cluster 11
+(133, 'B') - (138, 'B') in cluster 11
+(135, 'B') - (138, 'B') in cluster 11
+(137, 'B') - (142, 'B') in cluster 11
+(141, 'B') - (145, 'B') in cluster 11
+(19, 'A') - (168, 'A') in cluster 12
+(25, 'A') - (44, 'A') in cluster 12
+(51, 'A') - (88, 'A') in cluster 12
+(51, 'A') - (89, 'A') in cluster 12
+(58, 'A') - (82, 'A') in cluster 12
+(62, 'A') - (80, 'A') in cluster 12
+(71, 'A') - (318, 'A') in cluster 12
+(147, 'A') - (208, 'A') in cluster 12
+(178, 'A') - (1, 'B') in cluster 12
+(214, 'A') - (266, 'A') in cluster 12
+(228, 'A') - (283, 'A') in cluster 12
+(240, 'A') - (251, 'A') in cluster 12
+(280, 'A') - (288, 'A') in cluster 12
+(1, 'B') - (26, 'B') in cluster 12
+(1, 'B') - (27, 'B') in cluster 12
+(1, 'B') - (30, 'B') in cluster 12
+(50, 'B') - (74, 'B') in cluster 12
+(131, 'B') - (136, 'B') in cluster 12
+(131, 'B') - (148, 'B') in cluster 12
+(131, 'B') - (152, 'B') in cluster 12
+(132, 'B') - (148, 'B') in cluster 12
+(135, 'B') - (155, 'B') in cluster 12
+(137, 'B') - (144, 'B') in cluster 12
+(137, 'B') - (145, 'B') in cluster 12
+(137, 'B') - (147, 'B') in cluster 12
+(137, 'B') - (153, 'B') in cluster 12
+(138, 'B') - (143, 'B') in cluster 12
+(139, 'B') - (151, 'B') in cluster 12
+(147, 'B') - (152, 'B') in cluster 12
+(8, 'A') - (11, 'A') in cluster 13
+(8, 'A') - (14, 'A') in cluster 13
+(156, 'A') - (141, 'B') in cluster 13
+(168, 'A') - (180, 'A') in cluster 13
+(183, 'A') - (222, 'A') in cluster 13
+(91, 'B') - (145, 'B') in cluster 13
+(125, 'B') - (140, 'B') in cluster 13
+(139, 'B') - (143, 'B') in cluster 13
+(2, 'A') - (66, 'A') in cluster 14
+(2, 'A') - (84, 'A') in cluster 14
+(6, 'A') - (81, 'A') in cluster 14
+(7, 'A') - (81, 'A') in cluster 14
+(7, 'A') - (83, 'A') in cluster 14
+(8, 'A') - (12, 'A') in cluster 14
+(10, 'A') - (34, 'A') in cluster 14
+(73, 'A') - (160, 'A') in cluster 14
+(173, 'A') - (4, 'B') in cluster 14
+(176, 'A') - (5, 'B') in cluster 14
+(193, 'A') - (248, 'A') in cluster 14
+(231, 'A') - (283, 'A') in cluster 14
+(7, 'B') - (10, 'B') in cluster 14
+(11, 'B') - (35, 'B') in cluster 14
+(86, 'B') - (130, 'B') in cluster 14
+(5, 'A') - (110, 'B') in cluster 15
+(7, 'A') - (109, 'B') in cluster 15
+(9, 'A') - (76, 'B') in cluster 15
+(11, 'A') - (14, 'A') in cluster 15
+(19, 'A') - (22, 'B') in cluster 15
+(47, 'A') - (91, 'A') in cluster 15
+(74, 'A') - (78, 'A') in cluster 15
+(76, 'A') - (132, 'A') in cluster 15
+(105, 'A') - (125, 'A') in cluster 15
+(295, 'A') - (301, 'A') in cluster 15
+(307, 'A') - (323, 'A') in cluster 15
+(310, 'A') - (323, 'A') in cluster 15
+(4, 'B') - (7, 'B') in cluster 15
+(10, 'B') - (41, 'B') in cluster 15
+(21, 'B') - (53, 'B') in cluster 15
+(95, 'B') - (147, 'B') in cluster 15
+(125, 'B') - (137, 'B') in cluster 15
+(128, 'B') - (135, 'B') in cluster 15
+(136, 'B') - (152, 'B') in cluster 15

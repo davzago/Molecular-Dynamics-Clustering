@@ -1,36 +1,36 @@
-15 - 47 in cluster 0
-75 - 139 in cluster 0
-143 - 147 in cluster 0
-3 - 75 in cluster 1
-6 - 31 in cluster 1
-17 - 89 in cluster 1
-64 - 103 in cluster 1
-65 - 129 in cluster 1
-105 - 117 in cluster 1
-8 - 53 in cluster 2
-35 - 136 in cluster 2
-81 - 85 in cluster 2
-4 - 31 in cluster 3
-13 - 85 in cluster 3
-60 - 132 in cluster 3
-66 - 130 in cluster 3
-71 - 76 in cluster 3
-71 - 87 in cluster 3
-72 - 91 in cluster 3
-114 - 129 in cluster 3
-117 - 123 in cluster 3
-11 - 50 in cluster 4
-40 - 62 in cluster 4
-115 - 123 in cluster 4
-98 - 122 in cluster 5
-12 - 53 in cluster 6
-16 - 26 in cluster 6
-20 - 44 in cluster 6
-20 - 92 in cluster 6
-28 - 56 in cluster 6
-58 - 136 in cluster 6
-65 - 132 in cluster 6
-75 - 143 in cluster 6
-105 - 118 in cluster 6
-105 - 122 in cluster 6
-113 - 117 in cluster 6
+(75, 'A') - (107, 'A') in cluster 0
+(135, 'A') - (201, 'A') in cluster 0
+(205, 'A') - (209, 'A') in cluster 0
+(63, 'A') - (135, 'A') in cluster 1
+(66, 'A') - (91, 'A') in cluster 1
+(77, 'A') - (150, 'A') in cluster 1
+(124, 'A') - (164, 'A') in cluster 1
+(125, 'A') - (191, 'A') in cluster 1
+(166, 'A') - (178, 'A') in cluster 1
+(68, 'A') - (113, 'A') in cluster 2
+(95, 'A') - (198, 'A') in cluster 2
+(141, 'A') - (146, 'A') in cluster 2
+(64, 'A') - (91, 'A') in cluster 3
+(73, 'A') - (146, 'A') in cluster 3
+(120, 'A') - (194, 'A') in cluster 3
+(126, 'A') - (192, 'A') in cluster 3
+(131, 'A') - (136, 'A') in cluster 3
+(131, 'A') - (148, 'A') in cluster 3
+(132, 'A') - (152, 'A') in cluster 3
+(175, 'A') - (191, 'A') in cluster 3
+(178, 'A') - (185, 'A') in cluster 3
+(71, 'A') - (110, 'A') in cluster 4
+(100, 'A') - (122, 'A') in cluster 4
+(176, 'A') - (185, 'A') in cluster 4
+(159, 'A') - (184, 'A') in cluster 5
+(72, 'A') - (113, 'A') in cluster 6
+(76, 'A') - (86, 'A') in cluster 6
+(80, 'A') - (104, 'A') in cluster 6
+(80, 'A') - (153, 'A') in cluster 6
+(88, 'A') - (116, 'A') in cluster 6
+(118, 'A') - (198, 'A') in cluster 6
+(125, 'A') - (194, 'A') in cluster 6
+(135, 'A') - (205, 'A') in cluster 6
+(166, 'A') - (180, 'A') in cluster 6
+(166, 'A') - (184, 'A') in cluster 6
+(174, 'A') - (178, 'A') in cluster 6

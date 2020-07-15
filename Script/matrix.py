@@ -41,15 +41,6 @@ def calcVectorSimple(snap, snapSet, vector_position_simple):
             # print(i_simple, " pos:", vector_position_simple[i_simple]," --- Old --- ", vector_edges_simple[vector_position_simple[i_simple]])
     return vector_edges_simple
 
-# plot the n-th snapshot's distance matrix
-# make sure that ../fig directory already exists
-# PS: SI CONSIDERANO SOLAMENTE I NODI CHE SONO PRESENTI NELL'MD, QUINDI NON MOLTO INDICATIVO VISIVAMENTE
-""" def plotDistanceMatrix(matrix_snap, snap):
-    plt.imshow(matrix_snap[snap], cmap='Reds', interpolation='nearest')#, vmin=0, vmax=30)
-    plt.colorbar()
-    plt.savefig("../fig/" + str(snap) + ".png")
-    plt.close() """
-
 def ignore_diagonal(matrix_snap):
     no_diagonal_snaps = []
     for k in range(0,matrix_snap.shape[0]):
@@ -81,7 +72,6 @@ def edge_count(snapSet):
             else:
                 count[str(s[0]) + "-" + str(s[1]) + "-" + str(s[2])] = 1
     return sorted(count.items(), key=lambda x: x[1], reverse=False)
-    
 
 def output_edge_count(count_sorted, path):
     edges_count = open(path + "/edges_count.txt","w")
