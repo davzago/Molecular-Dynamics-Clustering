@@ -58,9 +58,17 @@ Note that this measure is severe since is usually used to check the obtained clu
 
 ## Clustering Algorithm
 
+### Data
+
+### Metric
+
 ### PCA
 
 ### Elbow and Silhouette
+
+### Outputs
+
+
 
 
 

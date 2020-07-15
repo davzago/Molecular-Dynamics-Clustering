@@ -19,7 +19,6 @@ parser.add_argument('data_path', help='File with the path to RING contact map fi
 parser.add_argument('-RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script (if not calculated use -path_to_pdb)')
 parser.add_argument('-path_to_pdb', help='The path to the pdb folder that is used to calculate the RMSD (to use if the RMSD has not already been calculated) the result will be put in a file named RMSD.txt in the folder named like the data_path in out_dir, also to use this command the TMscore.cpp is necessary')
 parser.add_argument('-out_dir', help='Output directory', default='../out_dir')
-parser.add_argument('-tmp_dir', help='Temporary file directory', default='../tmp_dir')
 args = parser.parse_args()
 
 snapSet = parsing.parse(args.data_path)
