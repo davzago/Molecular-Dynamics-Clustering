@@ -7,24 +7,23 @@ import sys
 import warnings
 import os
 
-
-
 import parsing
 import matrix
 import clustering
 import RMSD
+import RMSD_out
 
 
 parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
-parser.add_argument('-RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script')
+parser.add_argument('-RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script (if not calculated use -path_to_pdb)')
+parser.add_argument('-path_to_pdb', help='The path to the pdb folder that is used to calculate the RMSD (to use if the RMSD has not already been calculated) the result will be put in a file named RMSD.txt in the folder named like the data_path in out_dir, also to use this command the TMscore.cpp is necessary')
 parser.add_argument('-conf', help='Configuration file with algorithm parameters')
 parser.add_argument('-out_dir', help='Output directory', default='../out_dir')
 parser.add_argument('-tmp_dir', help='Temporary file directory', default='../tmp_dir')
 args = parser.parse_args()
 
-RMSD_path = args.RMSD_path 
-snapSet = parsing.parse2(args.data_path)
+snapSet = parsing.parse(args.data_path)
 n_snaps = len(snapSet)
 
 # define the name of the directory to be created
@@ -34,7 +33,7 @@ path = "../out_dir/" + splits[len(splits)-1].split('.')[0]
 try:
     os.mkdir(path)
 except OSError:
-    print ("%s Direcotry already exists" % path)
+    print ("%s Direcotry already exists, the already existing direcory will be used" % path)
 else:
     print ("Successfully created the directory %s " % path)
 
@@ -127,9 +126,13 @@ matrix.output_distance_matrix(distance_matrix, path)
 
 model, best_k = clustering.elbow(X_PCA, path)
 
+if args.path_to_pdb is not None:
+    RMSD_out.get_distance_matrix(args.path_to_pdb, path)
+
+
 
 if args.RMSD_path is not None:
-    RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
+    RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(args.RMSD_path)
     model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
     rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
     mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
@@ -142,6 +145,7 @@ important_list = clustering.get_important_contacts(common_contacts)
 
 matrix.output_labels(model.labels_, path)
 matrix.output_common_contacts(common_contacts, path)
+matrix.output_imprtant_contacts(important_list, node_list, path)
 
 """ edges_count = open("edges_count.txt","w")
 for i in count_sorted:

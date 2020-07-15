@@ -74,6 +74,8 @@ def plot_dendrogram(model, n_cluster, **kwargs):
     # To show the right cut on the dendogram we search for the treshold of the best cluster in the linkage matrix
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, color_threshold=linkage_matrix[len(linkage_matrix)-n_cluster][2]+0.00001, **kwargs) 
+    cut = (linkage_matrix[len(linkage_matrix)-n_cluster][2] + linkage_matrix[len(linkage_matrix)-n_cluster+1][2]) / 2
+    plt.hlines(cut,0, 10000, color='r', linewidth=0.5)
 
 
 def get_randIndex(contacts_labels, RMSD_labels):
@@ -115,11 +117,12 @@ def elbow(X, path):
     model = AgglomerativeClustering(affinity='cosine', linkage='average') # affinity='euclidean', linkage='ward'
     visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
     visualizer.fit(X)
-    plt.clf()
-    plt.close()
     dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0,
                                                  linkage='average', affinity='cosine').fit(X)
+    plt.figure(figsize=(20,10), dpi=200)
     plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
+    plt.xlabel("Number of the residue in the contact matrix")
+    plt.ylabel("cosine distance")
     plt.grid(b=None)
     plt.savefig(path + "/dendogram.png")
     plt.clf()

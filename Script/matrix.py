@@ -89,10 +89,20 @@ def output_labels(labels, path):
 
 def output_common_contacts(common_contacts, path):
     for i in range(0,len(common_contacts)):
+        plt.figure(figsize=(10,10))
         plt.imshow(common_contacts[i], cmap='Reds', interpolation='nearest')
         plt.colorbar()
-        plt.savefig(path + "/contact_map_" + str(i) + ".png")
+        plt.savefig(path + "/contact_map_" + str(i) + ".png", dpi=100)
         plt.close()
+
+def output_imprtant_contacts(important_list, node_list, path):
+    resultFile = open(path + "/important_contacts.txt","w")
+    for i in range(0,len(important_list)):
+        node1 = important_list[i][0]
+        node2 = important_list[i][1]
+        cluster = important_list[i][2]
+        resultFile.write(str(node1) + " - " + str(node2) + " in cluster " + str(cluster) + "\n")
+    resultFile.close()
 
 
 
