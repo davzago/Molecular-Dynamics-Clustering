@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 import operator
 import sys
 import warnings
+import os
+
 
 
 import parsing
@@ -15,15 +17,26 @@ import RMSD
 
 parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
 parser.add_argument('data_path', help='File with the path to RING contact map files (edge files)')
-parser.add_argument('RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script')
+parser.add_argument('-RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script')
 parser.add_argument('-conf', help='Configuration file with algorithm parameters')
-parser.add_argument('-out_dir', help='Output directory')
-parser.add_argument('-tmp_dir', help='Temporary file directory')
+parser.add_argument('-out_dir', help='Output directory', default='../out_dir')
+parser.add_argument('-tmp_dir', help='Temporary file directory', default='../tmp_dir')
 args = parser.parse_args()
 
 RMSD_path = args.RMSD_path 
 snapSet = parsing.parse2(args.data_path)
 n_snaps = len(snapSet)
+
+# define the name of the directory to be created
+splits = args.data_path.split('/')
+path = "../out_dir/" + splits[len(splits)-1].split('.')[0]
+
+try:
+    os.mkdir(path)
+except OSError:
+    print ("%s Direcotry already exists" % path)
+else:
+    print ("Successfully created the directory %s " % path)
 
 
 # node_list contiene tutti i nodi che compaiono almeno una volta in uno snapshot
@@ -84,10 +97,7 @@ np.set_printoptions(threshold=sys.maxsize)
 no_diag_snaps = matrix.ignore_diagonal(matrix_snap)
 
 
-RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
-with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
+
 
 
     
@@ -105,24 +115,33 @@ for i in range(0, len(snapSet)):
 count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
 
-"""X = clustering.squareform(clustering.pdist(vector_edges, metric='yule'))
+"""distance matrix = clustering.squareform(clustering.pdist(vector_edges, metric='yule'))
 clustering.test_metric(X[0,:], RMSD_distance_matrix[0,:])"""
 
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
 X_PCA = clustering.PCA_transform(scaled_vector)
 #X_SVD = clustering.SVD_transform(vector_edges_simple)
+distance_matrix = clustering.squareform(clustering.pdist(X_PCA, metric='cosine'))
+matrix.output_distance_matrix(distance_matrix, path)
 
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    model, best_k = clustering.elbow(X_PCA)
-rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
-mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
-#print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
-print("RandIndex between RMSD clustering and contact clustering:", rand_index)
 
-"""clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)
+model, best_k = clustering.elbow(X_PCA, path)
+
+
+if args.RMSD_path is not None:
+    RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(RMSD_path)
+    model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
+    rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
+    mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
+    #print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
+    print("RandIndex between RMSD clustering and contact clustering:", rand_index)
+
+clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)
 common_contacts = clustering.get_common_contacts(clusterized_snaps)
-important_list = clustering.get_important_contacts(common_contacts)"""
+important_list = clustering.get_important_contacts(common_contacts)
+
+matrix.output_labels(model.labels_, path)
+matrix.output_common_contacts(common_contacts, path)
 
 """ edges_count = open("edges_count.txt","w")
 for i in count_sorted:

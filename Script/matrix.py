@@ -72,6 +72,28 @@ def condense_matrix(snapshot, kernel_dim):
         return dense_matrix
     else: return np.zeros((3,3))  
 
+def output_distance_matrix(distance_matrix, path):
+    n = distance_matrix.shape[0]
+    resultFile = open(path + "/distance_matrix.txt","w")
+    for i in range(0,n):
+        for j in range(0,n):
+            resultFile.write(str(distance_matrix[i,j]) + " ")
+        resultFile.write("\n")
+    resultFile.close()
+
+def output_labels(labels, path):
+    resultFile = open(path + "/labels.txt","w")
+    for i in range(0,len(labels)):
+        resultFile.write("snap " + str(i+1) + ": " + str(labels[i]) + "\n")
+    resultFile.close()
+
+def output_common_contacts(common_contacts, path):
+    for i in range(0,len(common_contacts)):
+        plt.imshow(common_contacts[i], cmap='Reds', interpolation='nearest')
+        plt.colorbar()
+        plt.savefig(path + "/contact_map_" + str(i) + ".png")
+        plt.close()
+
 
 
 
