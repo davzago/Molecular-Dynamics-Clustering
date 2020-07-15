@@ -23,16 +23,3 @@ def get_distance_matrix(path_to_pdb, path): # now cycle trough the files with os
   resultFile.close()
   return distance_array
 
-"""parser = argparse.ArgumentParser(description='Hierarchical clustering using RING data.')
-parser.add_argument('data_path', help='path to the MD folder')
-path = parser.parse_args().data_path
-
-directory = os.fsencode(path)
-dirz = os.listdir(directory)
-for i in range(0,len(dirz)):
-    dirz[i] = path + '/' + dirz[i].decode('utf-8') + '/pdb'
-
-for p in dirz:
-    get_distance_matrix(p)
-"""
-

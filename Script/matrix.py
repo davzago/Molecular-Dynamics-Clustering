@@ -41,28 +41,6 @@ def calcVectorSimple(snap, snapSet, vector_position_simple):
             # print(i_simple, " pos:", vector_position_simple[i_simple]," --- Old --- ", vector_edges_simple[vector_position_simple[i_simple]])
     return vector_edges_simple
 
-def ignore_diagonal(matrix_snap):
-    no_diagonal_snaps = []
-    for k in range(0,matrix_snap.shape[0]):
-        contacts = []
-        for i in range(0, matrix_snap.shape[1]-100):
-            for j in range(i+100, matrix_snap.shape[1]):
-                contacts.append(matrix_snap[k,i,j])
-        no_diagonal_snaps.append(contacts)
-    return np.array(no_diagonal_snaps)
-
-def condense_matrix(snapshot, kernel_dim):
-    if snapshot.shape[0] % kernel_dim == 0:
-        new_dim = int(snapshot.shape[0] / kernel_dim)
-        dense_matrix = np.zeros((new_dim,new_dim))
-        for i in range(0,new_dim):
-            for j in range(0,new_dim):
-                for sub_i in range(0,kernel_dim):
-                    for sub_j in range(0,kernel_dim):  
-                        dense_matrix[i,j] += snapshot[i*kernel_dim+sub_i, j*kernel_dim+sub_j]
-        return dense_matrix
-    else: return np.zeros((3,3)) 
-
 def edge_count(snapSet):
     count = dict()
     for i in range(0, len(snapSet)):

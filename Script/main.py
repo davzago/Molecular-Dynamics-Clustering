@@ -1,11 +1,8 @@
 import argparse
 import numpy as np
-from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
-import operator
-import sys
-import warnings
 import os
+import operator
 
 import parsing
 import matrix
@@ -56,7 +53,6 @@ n_nodes = len(node_list)
 matrix_snap = np.zeros((n_snaps,n_nodes,n_nodes))
 for i in range(0, n_snaps):
     matrix_snap[i] = matrix.calcMatrix(i, snapSet, node_position)
-    #matrix.plotDistanceMatrix(matrix_snap, i, snapSet)
 
 pos = 0
 vector_position = dict()
@@ -93,7 +89,6 @@ matrix.output_edge_count(count_sorted, path)
 
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
 X_PCA = clustering.PCA_transform(scaled_vector)
-#X_SVD = clustering.SVD_transform(vector_edges_simple)
 distance_matrix = clustering.squareform(clustering.pdist(X_PCA, metric='cosine'))
 matrix.output_distance_matrix(distance_matrix, path)
 
@@ -101,14 +96,15 @@ matrix.output_distance_matrix(distance_matrix, path)
 model, best_k = clustering.elbow(X_PCA, path)
 
 if args.path_to_pdb is not None:
+    print("path_to_pdb")
     RMSD_out.get_distance_matrix(args.path_to_pdb, path)
 
 if args.RMSD_path is not None:
+    print("RMSD_path")
     RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(args.RMSD_path)
     model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
     rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
     mutal_info_score = clustering.normalized_mutual_info_score(model_RMSD.labels_,model.labels_)
-    #print("mutual info score between RMSD clustering and contact clustering:", mutal_info_score)
     print("RandIndex between RMSD clustering and contact clustering:", rand_index)
 
 clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_snap)

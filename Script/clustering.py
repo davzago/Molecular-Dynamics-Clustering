@@ -1,44 +1,19 @@
-from sklearn.cluster import AgglomerativeClustering, KMeans
-from sklearn.metrics import silhouette_score, adjusted_rand_score , normalized_mutual_info_score, adjusted_mutual_info_score
-from sklearn.decomposition import PCA, TruncatedSVD, NMF
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.metrics import adjusted_rand_score , normalized_mutual_info_score
+from sklearn.decomposition import PCA
 import numpy as np
 from matplotlib import pyplot as plt
-from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
-from scipy.stats import pearsonr
+from scipy.cluster.hierarchy import dendrogram
 from sklearn.preprocessing import StandardScaler
 from scipy.spatial.distance import pdist, squareform
 from yellowbrick.cluster import KElbowVisualizer
 import warnings
-
-# Compute the avarage silhouette for each n_clusters in range 2-50
-def clusterize(X):
-    sil = dict()
-    for k in range(4,51):
-       clustering = AgglomerativeClustering(n_clusters=k, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
-       sil[k] = silhouette_score(X, clustering.labels_, metric='cosine')
-    return sil
-
-# The first AgglomerativeClustering is used to create the dendogram since sklearn requires a distance_threshold to return
-#  the distances between clusters, the second time we actually compute the best cluster based on silhouettes 
-# couldn't find a way to save the clustering steps so we recompute the best cluster
-# X must be already shaped as a matrix of shape (n_samples, n_features)
-def get_best_cluster(X, sil):
-    maximum = max(sil, key=sil.get)
-    print("maximum contacts silhouette:" ,sil[maximum], "with", maximum, "clusters")
-    dendo_clustering = AgglomerativeClustering(n_clusters=None, compute_full_tree=True, distance_threshold=0,
-                                                 linkage='average', affinity='cosine').fit(X)
-    plot_dendrogram(dendo_clustering, maximum)
-    plt.xlabel("Number of points in node (or index of point if no parenthesis).")
-    plt.show()
-    model = AgglomerativeClustering(n_clusters=maximum, compute_full_tree=True, linkage='average', affinity='cosine').fit(X)
-    return model
 
 def reshape_matrix(X, n_snaps):
     return X.reshape((n_snaps, -1))
 
 def plot_dendrogram(model, n_cluster, **kwargs):
     # Create linkage matrix and then plot the dendrogram
-
     # create the counts of samples under each node
     counts = np.zeros(model.children_.shape[0])
     n_samples = len(model.labels_)
@@ -60,41 +35,8 @@ def plot_dendrogram(model, n_cluster, **kwargs):
     cut = (linkage_matrix[len(linkage_matrix)-n_cluster][2] + linkage_matrix[len(linkage_matrix)-n_cluster+1][2]) / 2
     plt.hlines(cut,0, 10000, color='r', linewidth=0.5)
 
-
-def get_randIndex(contacts_labels, RMSD_labels):
-    return adjusted_rand_score(contacts_labels, RMSD_labels)
-
 def PCA_transform(X):
     return PCA(n_components=0.9).fit_transform(X)
-
-def SVD_transform(X):
-    svd = TruncatedSVD(n_components=75, random_state=42)
-    X_transformed = svd.fit_transform(X)
-    return X_transformed
-
-def NMF_transform(X):
-    nmf = NMF(n_components=75, init='random', random_state=42, max_iter=20)
-    return nmf.fit_transform(X)
-
-def pearson_affinity(M):
-    return 1 - np.array([[pearsonr(a,b)[0] for a in M] for b in M])
-
-def pearson_metric(x, y):
-    return 1 - pearsonr(x,y)[0]
-
-def test_metric(x ,y):
-    x_dict = dict()
-    y_dict = dict()
-    
-    for i in range(0,len(x)):
-        x_dict[i] = x[i]
-    for i in range(0,len(y)):
-        y_dict[i] = y[i]
-    x_sorted = sorted(x_dict.items(), key = lambda x: x[1])
-    y_sorted = sorted(y_dict.items(), key = lambda x: x[1])
-    print([x[0] for x in x_sorted])
-    print([y[0] for y in y_sorted])
-
 
 def elbow(X, path):
     model = AgglomerativeClustering(affinity='cosine', linkage='average') # affinity='euclidean', linkage='ward'
