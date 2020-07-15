@@ -12,6 +12,7 @@ import warnings
 def reshape_matrix(X, n_snaps):
     return X.reshape((n_snaps, -1))
 
+# Plots the dendogram of the obtained clustering also adding the cut line
 def plot_dendrogram(model, n_cluster, **kwargs):
     # Create linkage matrix and then plot the dendrogram
     # create the counts of samples under each node
@@ -35,9 +36,11 @@ def plot_dendrogram(model, n_cluster, **kwargs):
     cut = (linkage_matrix[len(linkage_matrix)-n_cluster][2] + linkage_matrix[len(linkage_matrix)-n_cluster+1][2]) / 2
     plt.hlines(cut,0, 10000, color='r', linewidth=0.5)
 
+# applies the PCA trasformation on the scaled data, obtaining a matrix with less n_features (n_features is the number of features necessary to explain 90% of the variance of the data)
 def PCA_transform(X):
     return PCA(n_components=0.9).fit_transform(X)
 
+# method which tries every possible clustering from(4 to 50) to the output the best number of cluster
 def elbow(X, path):
     model = AgglomerativeClustering(affinity='cosine', linkage='average') # affinity='euclidean', linkage='ward'
     visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
@@ -54,6 +57,7 @@ def elbow(X, path):
     plt.close()
     return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='cosine', linkage='average').fit(X), visualizer.elbow_value_
 
+# Like elbow but for the RMSD clustering
 def elbow_RMSD(X):
     model = AgglomerativeClustering(compute_full_tree=True, affinity='precomputed', linkage='average')
     visualizer = KElbowVisualizer(model, k=(4,50), metric='silhouette', timings=False)
@@ -67,6 +71,7 @@ def elbow_RMSD(X):
     plt.close()
     return AgglomerativeClustering(n_clusters=visualizer.elbow_value_, affinity='precomputed', linkage='average').fit(X)
 
+# Returns the list of contact maps for each cluster
 def clusterize_snaps(best_k, labels, matrix_snap):
     clusterized_snaps = []
     for k in range(0,best_k):
@@ -81,6 +86,7 @@ def clusterize_snaps(best_k, labels, matrix_snap):
         clusterized_snaps.append(k_list)
     return clusterized_snaps
 
+# Computes the common contacts 
 def get_common_contacts(clusterized_snaps):
     common_snaps = []
     for k in range(0,len(clusterized_snaps)):
@@ -100,6 +106,7 @@ def get_common_contacts(clusterized_snaps):
         common_snaps.append(common_contacts)
     return common_snaps
 
+# Computes the list of important contacts for each cluster
 def get_important_contacts(common_contacts):
     important_contacts = []
     k = len(common_contacts)
