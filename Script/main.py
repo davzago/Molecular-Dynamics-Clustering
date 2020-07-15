@@ -19,7 +19,6 @@ parser.add_argument('data_path', help='File with the path to RING contact map fi
 parser.add_argument('-RMSD_path', help='Path to the file containing the distance matrix calculated with the TM-Score script (if not calculated use -path_to_pdb)')
 parser.add_argument('-path_to_pdb', help='The path to the pdb folder that is used to calculate the RMSD (to use if the RMSD has not already been calculated) the result will be put in a file named RMSD.txt in the folder named like the data_path in out_dir, also to use this command the TMscore.cpp is necessary')
 parser.add_argument('-out_dir', help='Output directory', default='../out_dir')
-parser.add_argument('-tmp_dir', help='Temporary file directory', default='../tmp_dir')
 args = parser.parse_args()
 
 snapSet = parsing.parse(args.data_path)
@@ -32,7 +31,7 @@ path = args.out_dir + "/" + splits[len(splits)-1].split('.')[0]
 try:
     os.mkdir(path)
 except OSError:
-    print ("%s Direcotry already exists, the already existing direcory will be used" % path)
+    print ("%s Directory already exists, the already existing directory will be used" % path)
 else:
     print ("Successfully created the directory %s " % path)
 
@@ -52,7 +51,6 @@ pos = 0
 for node in node_list:
     node_position[node] = pos
     pos += 1
-
 
 n_nodes = len(node_list)
 matrix_snap = np.zeros((n_snaps,n_nodes,n_nodes))
@@ -90,10 +88,10 @@ for i in range(0, n_snaps):
 
 scaled_vector = clustering.StandardScaler().fit_transform(vector_edges_simple)
 
+count_sorted = matrix.edge_count(snapSet)
+matrix.output_edge_count(count_sorted, path)
 
-    
-
-### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
+""" ### DISTINCT EDGES AND OCCURENCE COUNT IN ALL SNAPSHOT
 # key dict sono edges, value sono occorrenze dell'edge key (valuta residue1, residue2, interaction)
 count = dict()
 for i in range(0, len(snapSet)):
@@ -105,6 +103,10 @@ for i in range(0, len(snapSet)):
 
 count_sorted = sorted(count.items(), key=lambda x: x[1], reverse=False)
 
+edges_count = open("edges_count.txt","w")
+for i in count_sorted:
+    edges_count.write(str(i[0]) + ": " + str(i[1]) + "\n")
+edges_count.close() """
 
 """distance matrix = clustering.squareform(clustering.pdist(vector_edges, metric='yule'))
 clustering.test_metric(X[0,:], RMSD_distance_matrix[0,:])"""
@@ -121,8 +123,6 @@ model, best_k = clustering.elbow(X_PCA, path)
 if args.path_to_pdb is not None:
     RMSD_out.get_distance_matrix(args.path_to_pdb, path)
 
-
-
 if args.RMSD_path is not None:
     RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(args.RMSD_path)
     model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
@@ -137,43 +137,4 @@ important_list = clustering.get_important_contacts(common_contacts)
 
 matrix.output_labels(model.labels_, path)
 matrix.output_common_contacts(common_contacts, path)
-matrix.output_imprtant_contacts(important_list, node_position, path)
-
-""" edges_count = open("edges_count.txt","w")
-for i in count_sorted:
-    edges_count.write(str(i[0]) + ": " + str(i[1]) + "\n")
-    # print(i[0], ": ", i[1])
-edges_count.close() """
-
-""" ### test hamming distance. Scartato, snap hanno un rapporto contatti_diversi/contatti_totali troppo simili tra loro 
-### vector that contain the presence-bit for every edges in all snapshot
-pos = 0
-vector_position = dict()
-contact_list = []
-for i in range(0, n_sanps):
-    for s in snapSet[i].simple_edges:
-        if(s not in vector_position):
-            contact_list.append(s)
-            vector_position[s] = pos
-            pos += 1
-n_distinct_edges = len(contact_list)
-contact_vector = np.full((n_sanps,n_distinct_edges), 0)
-for i in range(0, n_sanps):
-    for e in range(0, len(contact_list)):
-            if(contact_list[e] in snapSet[i].simple_edges):
-                contact_vector[i][e] = 1
-
-distance = []
-n = 0
-for i in range(0, n_sanps-1):
-    for e in range(i+1, n_sanps):
-        same_value = np.count_nonzero(np.logical_and(contact_vector[i] == contact_vector[e], contact_vector[i] != 0))
-        different_value = np.count_nonzero(contact_vector[i] != contact_vector[e])
-        print(same_value, " /// ", different_value)
-        distance.append(different_value/(same_value+different_value))
-        print("(", i, " - ", e, ") --> ", distance[n])
-        n += 1
-        # print(i, " : ", e, " = ", distance.hamming(contact_vector[i], contact_vector[e]))
-labels = clustering.hamming_cluster(4, contact_vector, n_sanps, "../dendrogram/")
-print(labels) """
-
+matrix.output_important_contacts(important_list, node_list, path)

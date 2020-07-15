@@ -11,7 +11,7 @@ from yellowbrick.cluster import KElbowVisualizer
 import warnings
 
 
-def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
+""" def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
     c_type = "euclidean_distance"
     X = X.reshape((n_snaps,-1))
     #clustering = AgglomerativeClustering(n_clusters=n_cluster, compute_full_tree=True).fit(X)
@@ -25,7 +25,7 @@ def euclidean_cluster(n_cluster, X, out_dir="fig/", threshold=0):
     return clustering, Z
     # The linkage matrix shows how the clustering is done, it has n-1 rows and 4 columns, each row shows which clusters are 
     # getting combined their distance and the numbero of observations in the new cluster, the new cluster label is the sum
-    # of the labels of the 2 cluster composing it ence a cluster with a label lower than n is a cluster with a single observation
+    # of the labels of the 2 cluster composing it ence a cluster with a label lower than n is a cluster with a single observation """
 
 # Compute the avarage silhouette for each n_clusters in range 2-50
 def clusterize(X):

@@ -1,76 +1,76 @@
-132 - 145 in cluster 0
-134 - 143 in cluster 0
-12 - 38 in cluster 1
-39 - 47 in cluster 1
-13 - 40 in cluster 3
-114 - 126 in cluster 3
-4 - 29 in cluster 4
-8 - 26 in cluster 4
-38 - 47 in cluster 4
-43 - 74 in cluster 4
-71 - 79 in cluster 4
-85 - 129 in cluster 4
-137 - 140 in cluster 4
-0 - 14 in cluster 5
-0 - 26 in cluster 5
-1 - 14 in cluster 5
-1 - 26 in cluster 5
-3 - 14 in cluster 5
-5 - 13 in cluster 5
-10 - 30 in cluster 5
-130 - 149 in cluster 6
-130 - 151 in cluster 6
-0 - 28 in cluster 7
-0 - 29 in cluster 7
-0 - 32 in cluster 7
-1 - 5 in cluster 7
-1 - 6 in cluster 7
-1 - 29 in cluster 7
-1 - 32 in cluster 7
-2 - 6 in cluster 7
-2 - 32 in cluster 7
-2 - 33 in cluster 7
-3 - 8 in cluster 7
-3 - 29 in cluster 7
-3 - 33 in cluster 7
-16 - 40 in cluster 7
-28 - 65 in cluster 7
-32 - 65 in cluster 7
-37 - 67 in cluster 7
-45 - 74 in cluster 7
-48 - 96 in cluster 7
-82 - 111 in cluster 7
-85 - 117 in cluster 7
-90 - 124 in cluster 7
-102 - 152 in cluster 7
-102 - 154 in cluster 7
-103 - 145 in cluster 7
-104 - 150 in cluster 7
-104 - 151 in cluster 7
-136 - 143 in cluster 7
-143 - 151 in cluster 7
-12 - 39 in cluster 8
-13 - 42 in cluster 8
-16 - 43 in cluster 8
-16 - 50 in cluster 8
-17 - 43 in cluster 8
-31 - 37 in cluster 8
-36 - 39 in cluster 8
-38 - 66 in cluster 8
-43 - 50 in cluster 8
-78 - 83 in cluster 8
-1 - 4 in cluster 9
-10 - 13 in cluster 9
-12 - 41 in cluster 9
-23 - 58 in cluster 9
-31 - 62 in cluster 9
-37 - 66 in cluster 9
-45 - 49 in cluster 9
-51 - 55 in cluster 9
-76 - 108 in cluster 9
-82 - 112 in cluster 9
-97 - 103 in cluster 9
-106 - 111 in cluster 9
-129 - 133 in cluster 9
-130 - 133 in cluster 9
-146 - 150 in cluster 9
+(133, 'A') - (147, 'A') in cluster 0
+(135, 'A') - (145, 'A') in cluster 0
+(13, 'A') - (39, 'A') in cluster 1
+(40, 'A') - (48, 'A') in cluster 1
+(14, 'A') - (41, 'A') in cluster 3
+(115, 'A') - (127, 'A') in cluster 3
+(5, 'A') - (30, 'A') in cluster 4
+(9, 'A') - (27, 'A') in cluster 4
+(39, 'A') - (48, 'A') in cluster 4
+(44, 'A') - (75, 'A') in cluster 4
+(72, 'A') - (80, 'A') in cluster 4
+(86, 'A') - (130, 'A') in cluster 4
+(138, 'A') - (142, 'A') in cluster 4
+(1, 'A') - (15, 'A') in cluster 5
+(1, 'A') - (27, 'A') in cluster 5
+(2, 'A') - (15, 'A') in cluster 5
+(2, 'A') - (27, 'A') in cluster 5
+(4, 'A') - (15, 'A') in cluster 5
+(6, 'A') - (14, 'A') in cluster 5
+(11, 'A') - (31, 'A') in cluster 5
+(131, 'A') - (151, 'A') in cluster 6
+(131, 'A') - (153, 'A') in cluster 6
+(1, 'A') - (29, 'A') in cluster 7
+(1, 'A') - (30, 'A') in cluster 7
+(1, 'A') - (33, 'A') in cluster 7
+(2, 'A') - (6, 'A') in cluster 7
+(2, 'A') - (7, 'A') in cluster 7
+(2, 'A') - (30, 'A') in cluster 7
+(2, 'A') - (33, 'A') in cluster 7
+(3, 'A') - (7, 'A') in cluster 7
+(3, 'A') - (33, 'A') in cluster 7
+(3, 'A') - (34, 'A') in cluster 7
+(4, 'A') - (9, 'A') in cluster 7
+(4, 'A') - (30, 'A') in cluster 7
+(4, 'A') - (34, 'A') in cluster 7
+(17, 'A') - (41, 'A') in cluster 7
+(29, 'A') - (66, 'A') in cluster 7
+(33, 'A') - (66, 'A') in cluster 7
+(38, 'A') - (68, 'A') in cluster 7
+(46, 'A') - (75, 'A') in cluster 7
+(49, 'A') - (97, 'A') in cluster 7
+(83, 'A') - (112, 'A') in cluster 7
+(86, 'A') - (118, 'A') in cluster 7
+(91, 'A') - (125, 'A') in cluster 7
+(103, 'A') - (154, 'A') in cluster 7
+(103, 'A') - (156, 'A') in cluster 7
+(104, 'A') - (147, 'A') in cluster 7
+(105, 'A') - (152, 'A') in cluster 7
+(105, 'A') - (153, 'A') in cluster 7
+(137, 'A') - (145, 'A') in cluster 7
+(145, 'A') - (153, 'A') in cluster 7
+(13, 'A') - (40, 'A') in cluster 8
+(14, 'A') - (43, 'A') in cluster 8
+(17, 'A') - (44, 'A') in cluster 8
+(17, 'A') - (51, 'A') in cluster 8
+(18, 'A') - (44, 'A') in cluster 8
+(32, 'A') - (38, 'A') in cluster 8
+(37, 'A') - (40, 'A') in cluster 8
+(39, 'A') - (67, 'A') in cluster 8
+(44, 'A') - (51, 'A') in cluster 8
+(79, 'A') - (84, 'A') in cluster 8
+(2, 'A') - (5, 'A') in cluster 9
+(11, 'A') - (14, 'A') in cluster 9
+(13, 'A') - (42, 'A') in cluster 9
+(24, 'A') - (59, 'A') in cluster 9
+(32, 'A') - (63, 'A') in cluster 9
+(38, 'A') - (67, 'A') in cluster 9
+(46, 'A') - (50, 'A') in cluster 9
+(52, 'A') - (56, 'A') in cluster 9
+(77, 'A') - (109, 'A') in cluster 9
+(83, 'A') - (113, 'A') in cluster 9
+(98, 'A') - (104, 'A') in cluster 9
+(107, 'A') - (112, 'A') in cluster 9
+(130, 'A') - (134, 'A') in cluster 9
+(131, 'A') - (134, 'A') in cluster 9
+(148, 'A') - (152, 'A') in cluster 9
