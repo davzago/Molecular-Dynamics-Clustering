@@ -121,9 +121,3 @@ def get_important_contacts(common_contacts):
                     if w == k-1:
                         important_contacts.append((i,j,x))
     return important_contacts
-                    
-
-                    
-
-
-    

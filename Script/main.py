@@ -33,7 +33,7 @@ else:
     print ("Successfully created the directory %s " % path)
 
 
-# node_list contiene tutti i nodi che compaiono almeno una volta in uno snapshot
+# node_list contains all the node that appear at least one time
 node_list = []
 for i in range(0, n_snaps):
     for s in snapSet[i].nodes:
@@ -41,8 +41,7 @@ for i in range(0, n_snaps):
             node_list.append(s)
 node_list.sort(key = operator.itemgetter(1, 0))
 
-# dict per memorizzare, per ogni snapshot, per ogni nodo, la posizione nella matrice
-# si potrebbe spostare come proprietà di Snapshot, così da avere un dict distinto per ogni snapshot
+# create the contact matrix and contact vectors
 node_position = dict()
 pos = 0
 for node in node_list:
@@ -84,23 +83,22 @@ for i in range(0, n_snaps):
 
 scaled_vector = clustering.StandardScaler().fit_transform(vector_edges_simple)
 
+# compute contacts count labels
 count_sorted = matrix.edge_count(snapSet)
 matrix.output_edge_count(count_sorted, path)
 
+# clustering
 X = clustering.reshape_matrix(matrix_snap, n_snaps)
 X_PCA = clustering.PCA_transform(scaled_vector)
 distance_matrix = clustering.squareform(clustering.pdist(X_PCA, metric='cosine'))
 matrix.output_distance_matrix(distance_matrix, path)
 
-
 model, best_k = clustering.elbow(X_PCA, path)
 
 if args.path_to_pdb is not None:
-    print("path_to_pdb")
     RMSD_out.get_distance_matrix(args.path_to_pdb, path)
 
 if args.RMSD_path is not None:
-    print("RMSD_path")
     RMSD_distance_matrix = RMSD.get_distance_matrix_from_file(args.RMSD_path)
     model_RMSD = clustering.elbow_RMSD(RMSD_distance_matrix)
     rand_index = clustering.adjusted_rand_score(model_RMSD.labels_,model.labels_)
@@ -111,6 +109,7 @@ clusterized_snaps = clustering.clusterize_snaps(best_k, model.labels_, matrix_sn
 common_contacts = clustering.get_common_contacts(clusterized_snaps)
 important_list = clustering.get_important_contacts(common_contacts)
 
+# save data to output dir
 matrix.output_labels(model.labels_, path)
 matrix.output_common_contacts(common_contacts, path)
 matrix.output_important_contacts(important_list, node_list, path)

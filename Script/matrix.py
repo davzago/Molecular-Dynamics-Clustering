@@ -19,26 +19,24 @@ def calcMatrix(snap, snapSet, posList):
             matrix[posList[node1]][posList[node2]] += i[4] + 0.2 * abs(posList[node1] - posList[node2])
     return matrix
 
+# compute the n-th snapshot's distance vector. Each type of contact is in a different position
 def calcVector(snap, snapSet, vector_position):
     n = len(vector_position)
     vector_edges = np.zeros(n)
     for i in snapSet[snap].type_edges:
-        # if((abs(i[0][0] - i[1][0]) > 10) and (i[0][1] == i[1][1])):   # condizione per escludere contatti fra residui "vicini" nella sequenza
         vector_edges[vector_position[i]] = i[3] + 0.2 * abs(i[0][0] - i[1][0])
     return vector_edges
 
+# compute the n-th snapshot's distance vector. Each contact contains the weighted sum based on type of contacts
 def calcVectorSimple(snap, snapSet, vector_position_simple):
     n = len(vector_position_simple)
     vector_edges_simple = np.zeros(n)
     for i in snapSet[snap].type_edges:
         i_simple = tuple([i[0], i[1]])
-        # if((abs(i[0][0] - i[1][0]) > 10) and (i[0][1] == i[1][1])):   # condizione per escludere contatti fra residui "vicini" nella sequenza
         if(vector_edges_simple[vector_position_simple[i_simple]] == 0):
             vector_edges_simple[vector_position_simple[i_simple]] = i[3] + 0.1 * abs(i[0][0] - i[1][0])
-            # print(i_simple, " pos:", vector_position_simple[i_simple]," --- New --- ", vector_edges_simple[vector_position_simple[i_simple]])
         else:
             vector_edges_simple[vector_position_simple[i_simple]] += i[3] + 0.1 * abs(i[0][0] - i[1][0])
-            # print(i_simple, " pos:", vector_position_simple[i_simple]," --- Old --- ", vector_edges_simple[vector_position_simple[i_simple]])
     return vector_edges_simple
 
 def edge_count(snapSet):
