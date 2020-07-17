@@ -14,18 +14,10 @@ def calcMatrix(snap, snapSet, posList):
             node1 = node2
             node2 = tmp
         if(matrix[posList[node1]][posList[node2]] == 0):
-            matrix[posList[node1]][posList[node2]] = i[4] + 0.2 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] = i[4] + 0.1 * abs(node1[0] - node2[0])
         else:
-            matrix[posList[node1]][posList[node2]] += i[4] + 0.2 * abs(posList[node1] - posList[node2])
+            matrix[posList[node1]][posList[node2]] += i[4] + 0.1 * abs(node1[0] - node2[0])
     return matrix
-
-# compute the n-th snapshot's distance vector. Each type of contact is in a different position
-def calcVector(snap, snapSet, vector_position):
-    n = len(vector_position)
-    vector_edges = np.zeros(n)
-    for i in snapSet[snap].type_edges:
-        vector_edges[vector_position[i]] = i[3] + 0.2 * abs(i[0][0] - i[1][0])
-    return vector_edges
 
 # compute the n-th snapshot's distance vector. Each contact contains the weighted sum based on type of contacts
 def calcVectorSimple(snap, snapSet, vector_position_simple):

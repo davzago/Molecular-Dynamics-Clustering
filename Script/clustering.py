@@ -49,7 +49,7 @@ def elbow(X, path):
                                                  linkage='average', affinity='cosine').fit(X)
     plt.figure(figsize=(20,10), dpi=200)
     plot_dendrogram(dendo_clustering, visualizer.elbow_value_)
-    plt.xlabel("Number of the residue in the contact matrix")
+    plt.xlabel("Number of the snapshot")
     plt.ylabel("cosine distance")
     plt.grid(b=None)
     plt.savefig(path + "/dendogram.png")
